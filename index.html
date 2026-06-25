@@ -104,12 +104,55 @@
       box-shadow: 0 10px 28px rgba(124, 77, 255, 0.14);
     }
     a.work:hover::before { opacity: 1; }
+
+    .section-title { margin-top: 48px; }
+    .section-title:first-of-type { margin-top: 0; }
+
+    .item {
+      display: flex;
+      gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .item:last-child { border-bottom: none; }
+    .item-meta {
+      flex: 0 0 168px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0;
+      padding-top: 2px;
+    }
+    .item-body { min-width: 0; }
+    .item-title {
+      font-size: 1.05rem;
+      margin: 0;
+    }
+    .item-title .em {
+      color: var(--accent);
+      font-style: normal;
+    }
+    ol.item-list {
+      margin: 0;
+      padding-left: 1.3em;
+    }
+    ol.item-list > li { margin-bottom: 16px; }
+    ol.item-list > li:last-child { margin-bottom: 0; }
+    .item a, .item-list a {
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .item a:hover, .item-list a:hover { text-decoration: underline; }
+    .cite-title { font-style: italic; }
+
     @media (max-width: 480px) {
       body { padding: 48px 18px 72px; }
       .header { flex-direction: column; align-items: flex-start; gap: 18px; }
       .avatar { width: 170px; height: 230px; }
       h1 { font-size: 2.5rem; white-space: normal; }
       .subtitle { font-size: 1.3rem; white-space: normal; }
+      .item { flex-direction: column; gap: 4px; }
+      .item-meta { flex-basis: auto; padding-top: 0; }
     }
   </style>
 </head>
@@ -125,5 +168,63 @@
   <p class="section-title">Works</p>
   <a class="work" href="http://edu-omekas02.alab.kr/s/gitmu/page/about">'깃'든 '무'늬 아카이브</a>
   <a class="work" href="emuseum-facet.html">e뮤지엄 패싯 분류</a>
+
+  <p class="section-title">Projects</p>
+  <div class="item">
+    <p class="item-meta">Jul. 2025 – Dec. 2025</p>
+    <div class="item-body">
+      <p class="item-title">국가유산 정보서비스 콘텐츠 개선 가이드라인 제작</p>
+      <p class="item-meta" style="flex:none">KAIST, Korea</p>
+    </div>
+  </div>
+
+  <p class="section-title">Publications</p>
+  <ol class="item-list">
+    <li>
+      Lee, Y. S., <span class="cite-title">"Database Design for a Hanbok Data Archive: Focused on the Seok Juseon Memorial Museum Collection of Dankook University"</span>, ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences (2025).
+      <br>
+      <a href="https://isprs-annals.copernicus.org/articles/X-M-2-2025/229/2025/isprs-annals-X-M-2-2025-229-2025.html">isprs-annals.copernicus.org/articles/X-M-2-2025/229/2025</a>
+    </li>
+  </ol>
+
+  <p class="section-title">Conferences</p>
+  <div class="item">
+    <p class="item-meta">Apr. 2025</p>
+    <div class="item-body">
+      <p class="item-title">Yunseo Lee, Yeonwoo Choi, <span class="cite-title">"한국 고대 복식의 탐색과 재인식"</span>, 한복문화학회, Yongin, Korea — Oral</p>
+    </div>
+  </div>
+  <div class="item">
+    <p class="item-meta">Aug. 2025</p>
+    <div class="item-body">
+      <p class="item-title">CIPA 2025 — Oral</p>
+    </div>
+  </div>
+
+  <p class="section-title">Experiences</p>
+  <div class="item">
+    <p class="item-meta">Dec. 2023 – Jan. 2024</p>
+    <div class="item-body">
+      <p class="item-title">참여작가, &lt;12인 12색, 겨울에 꽃피우다&gt; 온라인 전시회</p>
+    </div>
+  </div>
+  <div class="item">
+    <p class="item-meta">Apr. 2024 – Aug. 2024</p>
+    <div class="item-body">
+      <p class="item-title">기획 및 진행, 한복상점</p>
+    </div>
+  </div>
+  <div class="item">
+    <p class="item-meta">Sep. 2023 – Oct. 2023</p>
+    <div class="item-body">
+      <p class="item-title">보조 큐레이터, &lt;무신진찬 여령옷, 손으로 짓고 3D 디지털로 입히다&gt;</p>
+    </div>
+  </div>
+  <div class="item">
+    <p class="item-meta">Apr. 2023 – Aug. 2023</p>
+    <div class="item-body">
+      <p class="item-title">기획 및 진행, 한복상점</p>
+    </div>
+  </div>
 </body>
 </html>

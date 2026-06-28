@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yunseo Isabel Lee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f3fb;
+      --ink: #2e2440;
+      --muted: #8a7ca8;
+      --plum: #4a3a6b;
+      --accent: #6b5d7a;
+      --line: #e6dcf5;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Gowun Batang", "Noto Serif KR", serif;
+      line-height: 1.75;
+      background: var(--bg);
+    }
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 40px;
+      background: transparent;
+      color: #fff;
+      transition: color 0.4s ease, text-shadow 0.4s ease;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.35);
+    }
+    .nav a { color: inherit; text-decoration: none; }
+    .nav-brand {
+      font-family: "Playfair Display", serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      font-family: "Playfair Display", serif;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      opacity: 0.92;
+      padding-bottom: 3px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-links a:hover { opacity: 1; border-bottom-color: currentColor; }
+    .nav.scrolled {
+      color: var(--plum);
+      text-shadow: none;
+    }
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 560px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .hero-slides { position: absolute; inset: 0; z-index: 0; }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.6s ease-in-out;
+    }
+    .hero-slide.is-active { opacity: 1; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(46,36,64,0.30) 0%, rgba(46,36,64,0.15) 40%, rgba(46,36,64,0.55) 100%),
+        rgba(74,58,107,0.28);
+    }
+    .hero-center {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      padding: 0 24px;
+    }
+    .hero-name {
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+      font-size: clamp(2.8rem, 9vw, 6.5rem);
+      letter-spacing: 0.02em;
+      margin: 0 0 26px;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.25);
+    }
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+      margin: 0 0 10px;
+      text-shadow: 0 1px 14px rgba(0,0,0,0.35);
+    }
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.7vw, 1.05rem);
+      opacity: 0.92;
+      margin: 0;
+      text-shadow: 0 1px 14px rgba(0,0,0,0.35);
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: #fff;
+      opacity: 0.8;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      animation: bob 2.2s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100%{ transform: translate(-50%,0);} 50%{ transform: translate(-50%,7px);} }
+    .about {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 110px 24px 130px;
+    }
+    .about-eyebrow {
+      font-family: "Playfair Display", serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin: 0 0 22px;
+    }
+    .about p { font-size: 1.12rem; margin: 0 0 20px; }
+    .about .han { color: var(--plum); font-weight: 700; }
+    .about-cta {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.08em;
+      color: var(--plum);
+      text-decoration: none;
+      border-bottom: 1px solid var(--plum);
+      padding-bottom: 3px;
+      transition: opacity 0.2s ease;
+    }
+    .about-cta:hover { opacity: 0.6; }
+    @media (max-width: 560px) {
+      .nav { padding: 18px 22px; }
+      .nav-links { gap: 18px; }
+      .about { padding: 80px 22px 96px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <a class="nav-brand" href="/en">Yunseo Isabel Lee</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="/en/cv">CV</a>
+      <a href="/">KO</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-slides" id="slides">
+      <div class="hero-slide is-active" style="background-image:url('/images/hero1.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero2.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero3.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero4.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero5.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero6.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero7.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero8.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero9.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero10.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero11.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/images/hero12.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-center">
+      <h1 class="hero-name">SincereLee</h1>
+      <p class="hero-tagline">允 to record with sincerity — 瑞 to pass on the auspicious.</p>
+      <p class="hero-sub">Designing digital archives for Korean dress and hanbok (韓服).</p>
+    </div>
+    <span class="scroll-hint">SCROLL</span>
+  </header>
+
+  <section class="about" id="about">
+    <p class="about-eyebrow">About</p>

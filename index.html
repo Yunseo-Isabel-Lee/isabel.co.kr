@@ -1,38 +1,220 @@
-<div class="hero-slider">
-  <img src="hero1.jpg" class="slide active" alt="">
-  <img src="hero2.jpg" class="slide" alt="">
-  <img src="hero3.jpg" class="slide" alt="">
-</div>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yunseo Isabel Lee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f3fb;
+      --ink: #2e2440;
+      --muted: #8a7ca8;
+      --plum: #4a3a6b;
+      --accent: #6b5d7a;
+      --line: #e6dcf5;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Gowun Batang", "Noto Serif KR", serif;
+      line-height: 1.75;
+      background: var(--bg);
+    }
 
-<style>
-.hero-slider {
-  position: relative;
-  width: 100%;
-  height: 500px;        /* 원하는 높이로 조정 */
-  overflow: hidden;
-}
-.hero-slider .slide {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;    /* 잘리더라도 꽉 채움 */
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-.hero-slider .slide.active {
-  opacity: 1;
-}
-</style>
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 560px;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.6s ease-in-out;
+    }
+    .hero-slide.is-active { opacity: 1; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(46,36,64,0.30) 0%, rgba(46,36,64,0.15) 40%, rgba(46,36,64,0.55) 100%),
+        rgba(74,58,107,0.28);
+    }
 
-<script>
-(function () {
-  const slides = document.querySelectorAll('.hero-slider .slide');
-  let current = 0;
-  setInterval(() => {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-  }, 4000);   // 4초마다 전환
-})();
-</script>
+    .nav {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 40px;
+      color: #fff;
+    }
+    .nav-brand {
+      font-family: "Playfair Display", serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+    }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-family: "Playfair Display", serif;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+      padding-bottom: 3px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-links a:hover { opacity: 1; border-bottom-color: rgba(255,255,255,0.7); }
+
+    .hero-center {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      padding: 0 24px;
+    }
+    .hero-name {
+      font-family: "Playfair Display", serif;
+      font-weight: 500;
+      font-size: clamp(2.8rem, 9vw, 6.5rem);
+      letter-spacing: 0.02em;
+      margin: 0 0 26px;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.25);
+    }
+    .hero-tagline {
+      font-size: clamp(1.05rem, 2.4vw, 1.5rem);
+      margin: 0 0 10px;
+      text-shadow: 0 1px 14px rgba(0,0,0,0.35);
+    }
+    .hero-sub {
+      font-size: clamp(0.9rem, 1.7vw, 1.05rem);
+      opacity: 0.92;
+      margin: 0;
+      text-shadow: 0 1px 14px rgba(0,0,0,0.35);
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 26px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: #fff;
+      opacity: 0.8;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      animation: bob 2.2s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100%{ transform: translate(-50%,0);} 50%{ transform: translate(-50%,7px);} }
+
+    /* ===== ABOUT ===== */
+    .about {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 110px 24px 130px;
+    }
+    .about-eyebrow {
+      font-family: "Playfair Display", serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin: 0 0 22px;
+    }
+    .about p {
+      font-size: 1.12rem;
+      margin: 0 0 20px;
+    }
+    .about .han { color: var(--plum); font-weight: 700; }
+    .about-cta {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.08em;
+      color: var(--plum);
+      text-decoration: none;
+      border-bottom: 1px solid var(--plum);
+      padding-bottom: 3px;
+      transition: opacity 0.2s ease;
+    }
+    .about-cta:hover { opacity: 0.6; }
+
+    @media (max-width: 560px) {
+      .nav { padding: 20px 22px; }
+      .nav-links { gap: 18px; }
+      .about { padding: 80px 22px 96px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-slides" id="slides">
+      <div class="hero-slide is-active" style="background-image:url('/hero1.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/hero2.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('/hero3.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <nav class="nav">
+      <span class="nav-brand">Yunseo Isabel Lee</span>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="/cv">CV</a>
+      </div>
+    </nav>
+
+    <div class="hero-center">
+      <h1 class="hero-name">Yunseo Isabel Lee</h1>
+      <p class="hero-tagline">允, 진실하게 기록하고 — 瑞, 상서로움을 전하다.</p>
+      <p class="hero-sub">한국 복식, 한복의 디지털 아카이브를 설계합니다.</p>
+    </div>
+
+    <span class="scroll-hint">SCROLL</span>
+  </header>
+
+  <section class="about" id="about">
+    <p class="about-eyebrow">About</p>
+    <p><span class="han">允</span>, 진실하게 기록하고 — <span class="han">瑞</span>, 상서로움을 전하다.</p>
+    <p>한국학중앙연구원 인문정보학과 박사과정으로, 한국 복식과 한복 문화유산의 디지털 아카이빙을 연구합니다. 흩어진 복식 자료를 데이터베이스로 설계하고, 패싯 분류와 구조화를 통해 오래 잇고 전할 수 있는 기록으로 남기는 일에 관심을 두고 있습니다.</p>
+    <a class="about-cta" href="/cv">전체 이력 보기 →</a>
+  </section>
+
+  <script>
+    (function () {
+      var slides = document.querySelectorAll('#slides .hero-slide');
+      if (slides.length < 2) return;
+      var i = 0;
+      setInterval(function () {
+        slides[i].classList.remove('is-active');
+        i = (i + 1) % slides.length;
+        slides[i].classList.add('is-active');
+      }, 3000);
+    })();
+  </script>
+</body>
+</html>

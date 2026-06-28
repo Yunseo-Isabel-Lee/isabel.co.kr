@@ -30,6 +30,17 @@
         var(--bg);
       min-height: 100vh;
     }
+    .home-link {
+      display: inline-block;
+      margin-bottom: 28px;
+      font-family: "Playfair Display", serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+    .home-link:hover { color: var(--accent); }
     .header {
       display: flex;
       flex-direction: row;
@@ -156,6 +167,7 @@
   </style>
 </head>
 <body>
+  <a class="home-link" href="/" aria-label="HOME">← Home</a>
   <div class="header">
     <img class="avatar" src="/profile.jpg" alt="Yunseo Isabel Lee">
     <div class="header-text">

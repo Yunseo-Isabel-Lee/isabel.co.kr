@@ -61,8 +61,8 @@
       object-fit: cover;
       object-position: center 22%;
       z-index: 1;
-      -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 93%);
-      mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 62%, transparent 93%);
+      -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 82%, transparent 96%);
+      mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 78%, transparent 96%);
     }
     .avatar-frame .frame {
       position: absolute;
@@ -87,6 +87,18 @@
       margin: 0;
       white-space: nowrap;
     }
+    .email {
+      margin: 12px 0 0;
+      font-family: "Playfair Display", serif;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .email a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+    .email a:hover { color: var(--accent); }
     .section-title {
       font-family: "Playfair Display", serif;
       font-size: 0.8rem;

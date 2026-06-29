@@ -54,11 +54,11 @@
       width: 240px;
     }
     .avatar-frame .photo {
-      width: 100%;
-      aspect-ratio: 3 / 4;
+      width: 240px;
+      height: 300px;
       object-fit: cover;
       object-position: center 16%;
-      border-radius: 12px;
+      border-radius: 50%;
       display: block;
       box-shadow: 0 14px 32px rgba(74, 58, 107, 0.16);
       position: relative;
@@ -66,14 +66,16 @@
     }
     .avatar-frame .lav {
       position: absolute;
-      z-index: 2;
-      width: 78px;
-      bottom: -12px;
+      z-index: 3;
+      bottom: -38px;
+      left: 50%;
+      width: 112px;
       pointer-events: none;
+      transform-origin: bottom center;
       filter: drop-shadow(0 3px 8px rgba(74, 58, 107, 0.12));
     }
-    .avatar-frame .lav-left { left: -26px; transform: rotate(10deg); }
-    .avatar-frame .lav-right { right: -26px; transform: rotate(-10deg); }
+    .avatar-frame .lav-left  { transform: translateX(-50%) rotate(-34deg); }
+    .avatar-frame .lav-right { transform: translateX(-50%) rotate(34deg) scaleX(-1); }
     .header-text { min-width: 0; }
     h1 {
       font-family: "Playfair Display", "Gowun Batang", serif;
@@ -185,7 +187,8 @@
     @media (max-width: 480px) {
       body { padding: 48px 18px 72px; }
       .header { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .avatar-frame { width: 230px; }
+      .avatar-frame { width: 200px; }
+      .avatar-frame .photo { width: 200px; height: 250px; }
       h1 { font-size: 2.5rem; white-space: normal; }
       .subtitle { font-size: 1.3rem; white-space: normal; }
       .item { flex-direction: column; gap: 4px; }
@@ -198,8 +201,8 @@
   <a class="home-link" href="/" aria-label="HOME">← Home</a>
   <div class="header">
     <div class="avatar-frame">
-      <img class="lav lav-left" src="/images/lavender.png" alt="">
       <img class="photo" src="/profile.jpg" alt="Yunseo Isabel Lee">
+      <img class="lav lav-left" src="/images/lavender.png" alt="">
       <img class="lav lav-right" src="/images/lavender.png" alt="">
     </div>
     <div class="header-text">

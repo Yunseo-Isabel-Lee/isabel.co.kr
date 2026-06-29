@@ -49,34 +49,15 @@
       gap: 32px;
       margin-bottom: 56px;
     }
-    .avatar-frame {
+    .avatar {
       flex: 0 0 auto;
-      position: relative;
-      width: 240px;
-    }
-    .avatar-frame .photo {
-      width: 240px;
-      height: 300px;
+      width: 220px;
+      height: 280px;
       object-fit: cover;
-      object-position: center 16%;
-      border-radius: 50%;
-      display: block;
+      object-position: center 20%;
+      border-radius: 16px;
       box-shadow: 0 14px 32px rgba(74, 58, 107, 0.16);
-      position: relative;
-      z-index: 1;
     }
-    .avatar-frame .lav {
-      position: absolute;
-      z-index: 3;
-      bottom: -38px;
-      left: 50%;
-      width: 112px;
-      pointer-events: none;
-      transform-origin: bottom center;
-      filter: drop-shadow(0 3px 8px rgba(74, 58, 107, 0.12));
-    }
-    .avatar-frame .lav-left  { transform: translateX(-50%) rotate(-34deg); }
-    .avatar-frame .lav-right { transform: translateX(-50%) rotate(34deg) scaleX(-1); }
     .header-text { min-width: 0; }
     h1 {
       font-family: "Playfair Display", "Gowun Batang", serif;
@@ -188,8 +169,7 @@
     @media (max-width: 480px) {
       body { padding: 48px 18px 72px; }
       .header { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .avatar-frame { width: 200px; }
-      .avatar-frame .photo { width: 200px; height: 250px; }
+      .avatar { width: 180px; height: 230px; }
       h1 { font-size: 2.5rem; white-space: normal; }
       .subtitle { font-size: 1.3rem; white-space: normal; }
       .item { flex-direction: column; gap: 4px; }
@@ -201,11 +181,7 @@
 <body>
   <a class="home-link" href="/" aria-label="HOME">← Home</a>
   <div class="header">
-    <div class="avatar-frame">
-      <img class="photo" src="/profile.jpg" alt="Yunseo Isabel Lee">
-      <img class="lav lav-left" src="/images/lavender.png" alt="">
-      <img class="lav lav-right" src="/images/lavender.png" alt="">
-    </div>
+    <img class="avatar" src="/profile.jpg" alt="Yunseo Isabel Lee">
     <div class="header-text">
       <h1>Yunseo Isabel Lee</h1>
       <p class="subtitle">한국학중앙연구원 인문정보학과 박사과정</p>

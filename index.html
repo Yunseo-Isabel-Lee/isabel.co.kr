@@ -173,6 +173,17 @@
     }
     .about p { text-align: left; }
     .about .about-eyebrow { text-align: center; }
+    .about-cta {
+      display: inline-block;
+      margin-top: 40px;
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.08em;
+      color: var(--plum);
+      text-decoration: none;
+      border-bottom: 1px solid var(--plum);
+      padding-bottom: 3px;
+      transition: opacity 0.2s ease;
+    }
     .about-cta:hover { opacity: 0.6; }
 
     @media (max-width: 560px) {
@@ -180,6 +191,26 @@
       .nav-links { gap: 18px; }
       .about { padding: 80px 22px 96px; }
     }
+    .footer {
+      border-top: 1px solid var(--line);
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .footer .footer-name {
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.04em;
+      color: var(--plum);
+      margin: 0 0 6px;
+    }
+    .footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+    .footer a:hover { color: var(--accent); }
+    .footer .footer-meta { margin: 0; }
   </style>
 </head>
 <body>
@@ -223,6 +254,10 @@
     <p>안녕하세요, 이윤서입니다. 이렇게 찾아와 주셔서 반갑습니다. 흩어진 한복 자료를 모아 아카이브로 엮는 연구를 하다 보니, 제 이야기도 한곳에 모아두고 싶었습니다. 인생 첫 사이트라 곳곳이 아직 공사중이지만, 기록이란 원래 계속 더해지는 법이니까요. 하나씩 채워갈테니 가끔 들러 달라지는 모습을 지켜봐 주세요.</p>
     <a class="about-cta" href="/cv">전체 이력 보기 →</a>
   </section>
+  <footer class="footer">
+    <p class="footer-name">SincereLee</p>
+    <p class="footer-meta">© 2026 Yunseo Isabel Lee · <a href="mailto:lisabelys@gmail.com">lisabelys@gmail.com</a></p>
+  </footer>
 
   <script>
     (function () {

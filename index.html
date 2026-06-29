@@ -141,27 +141,38 @@
       margin: 0 auto;
       padding: 110px 24px 130px;
     }
+    .about { text-align: center; }
     .about-eyebrow {
       font-family: "Playfair Display", serif;
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
       color: var(--accent);
-      margin: 0 0 22px;
+      margin: 0 0 18px;
     }
-    .about p { font-size: 1.12rem; margin: 0 0 20px; }
-    .about .han { color: var(--plum); font-weight: 700; }
-    .about-cta {
-      display: inline-block;
-      margin-top: 16px;
-      font-family: "Playfair Display", serif;
-      letter-spacing: 0.08em;
-      color: var(--plum);
-      text-decoration: none;
-      border-bottom: 1px solid var(--plum);
-      padding-bottom: 3px;
-      transition: opacity 0.2s ease;
+    .about-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 0 40px;
     }
+    .about-divider::before,
+    .about-divider::after {
+      content: "";
+      width: 60px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+    .about-divider .diamond {
+      width: 7px;
+      height: 7px;
+      background: var(--plum);
+      transform: rotate(45deg);
+    }
+    .about p { text-align: left; }
+    .about .about-eyebrow { text-align: center; }
     .about-cta:hover { opacity: 0.6; }
 
     @media (max-width: 560px) {
@@ -207,6 +218,7 @@
 
   <section class="about" id="about">
     <p class="about-eyebrow">About</p>
+    <div class="about-divider"><span class="diamond"></span></div>
     <p><span class="han">允</span>, 진실하게 기록하고 — <span class="han">瑞</span>, 상서로움을 전하다.</p>
     <p>안녕하세요, 이윤서입니다. 이렇게 찾아와 주셔서 반갑습니다. 흩어진 한복 자료를 모아 아카이브로 엮는 연구를 하다 보니, 제 이야기도 한곳에 모아두고 싶었습니다. 인생 첫 사이트라 곳곳이 아직 공사중이지만, 기록이란 원래 계속 더해지는 법이니까요. 하나씩 채워갈테니 가끔 들러 달라지는 모습을 지켜봐 주세요.</p>
     <a class="about-cta" href="/cv">전체 이력 보기 →</a>

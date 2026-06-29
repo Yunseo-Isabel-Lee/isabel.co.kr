@@ -51,26 +51,29 @@
     .avatar-frame {
       flex: 0 0 auto;
       position: relative;
-      width: 300px;
-      aspect-ratio: 1 / 1;
+      width: 240px;
     }
     .avatar-frame .photo {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 62%; height: 62%;
+      width: 100%;
+      aspect-ratio: 3 / 4;
       object-fit: cover;
-      object-position: center 18%;
-      border-radius: 10px;
+      object-position: center 16%;
+      border-radius: 12px;
+      display: block;
+      box-shadow: 0 14px 32px rgba(74, 58, 107, 0.16);
+      position: relative;
       z-index: 1;
     }
-    .avatar-frame .frame {
+    .avatar-frame .lav {
       position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
       z-index: 2;
+      width: 78px;
+      bottom: -12px;
       pointer-events: none;
+      filter: drop-shadow(0 3px 8px rgba(74, 58, 107, 0.12));
     }
+    .avatar-frame .lav-left { left: -26px; transform: rotate(10deg); }
+    .avatar-frame .lav-right { right: -26px; transform: rotate(-10deg); }
     .header-text { min-width: 0; }
     h1 {
       font-family: "Playfair Display", "Gowun Batang", serif;
@@ -195,8 +198,9 @@
   <a class="home-link" href="/" aria-label="HOME">← Home</a>
   <div class="header">
     <div class="avatar-frame">
+      <img class="lav lav-left" src="/images/lavender.png" alt="">
       <img class="photo" src="/profile.jpg" alt="Yunseo Isabel Lee">
-      <img class="frame" src="/images/wreath.png" alt="">
+      <img class="lav lav-right" src="/images/lavender.png" alt="">
     </div>
     <div class="header-text">
       <h1>Yunseo Isabel Lee</h1>

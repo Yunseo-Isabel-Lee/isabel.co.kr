@@ -45,7 +45,6 @@
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: center;
       gap: 32px;
       margin-bottom: 56px;
     }
@@ -67,6 +66,14 @@
       margin: 0 0 8px;
       color: #4a3a6b;
       white-space: nowrap;
+    }
+    .hanja {
+      font-size: 0.5em;
+      font-weight: 400;
+      color: var(--accent-soft);
+      margin-left: 0.4em;
+      letter-spacing: 0.05em;
+      vertical-align: baseline;
     }
     .subtitle {
       color: var(--muted);
@@ -183,7 +190,7 @@
   <div class="header">
     <img class="avatar" src="/profile.jpg" alt="Yunseo Isabel Lee">
     <div class="header-text">
-      <h1>Yunseo Isabel Lee</h1>
+      <h1>Yunseo Lee<span class="hanja">李允瑞</span></h1>
       <p class="subtitle">한국학중앙연구원 인문정보학과 박사과정</p>
       <p class="email"><a href="mailto:lisabelys@gmail.com">lisabelys@gmail.com</a></p>
     </div>

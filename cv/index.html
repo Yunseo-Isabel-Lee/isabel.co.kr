@@ -51,7 +51,7 @@
     .avatar-frame {
       flex: 0 0 auto;
       position: relative;
-      width: 230px;
+      width: 300px;
       aspect-ratio: 799 / 800;
     }
     .avatar-frame .photo {
@@ -170,9 +170,21 @@
     @media (max-width: 480px) {
       body { padding: 48px 18px 72px; }
       .header { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .avatar-frame { width: 190px; }
+      .avatar-frame { width: 230px; }
       h1 { font-size: 2.5rem; white-space: normal; }
       .subtitle { font-size: 1.3rem; white-space: normal; }
+      .email {
+      margin: 12px 0 0;
+      font-family: "Playfair Display", serif;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .email a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+    .email a:hover { color: var(--accent); }
       .item { flex-direction: column; gap: 4px; }
       .item-meta { flex-basis: auto; padding-top: 0; }
     }
@@ -186,8 +198,9 @@
       <img class="frame" src="/images/frame.png" alt="">
     </div>
     <div class="header-text">
-      <h1>Yunseo Isabel Lee</h1>
+      <<h1>Yunseo Isabel Lee</h1>
       <p class="subtitle">한국학중앙연구원 인문정보학과 박사과정</p>
+      <p class="email"><a href="mailto:lisabelys@gmail.com">lisabelys@gmail.com</a></p>
     </div>
   </div>
 

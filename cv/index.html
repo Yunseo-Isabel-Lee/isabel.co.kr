@@ -52,17 +52,17 @@
       flex: 0 0 auto;
       position: relative;
       width: 300px;
-      aspect-ratio: 799 / 800;
+      aspect-ratio: 1 / 1;
     }
     .avatar-frame .photo {
       position: absolute;
-      top: 5%; left: 13%;
-      width: 74%; height: 86%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 62%; height: 62%;
       object-fit: cover;
-      object-position: center 22%;
+      object-position: center 18%;
+      border-radius: 10px;
       z-index: 1;
-      -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 82%, transparent 96%);
-      mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 82%, transparent 96%);
     }
     .avatar-frame .frame {
       position: absolute;

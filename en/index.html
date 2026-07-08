@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yunseo Isabel Lee</title>
+
+  <!-- ===== Link preview (Open Graph / Twitter) ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://isabel.co.kr/en">
+  <meta property="og:title" content="Yunseo Isabel Lee · SincereLee">
+  <meta property="og:description" content="Researching digital archiving for Korean Traditional Dress, Hanbok(韓服).">
+  <meta property="og:image" content="https://isabel.co.kr/images/hero1.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Yunseo Isabel Lee · SincereLee">
+  <meta name="twitter:description" content="Researching digital archiving for Korean Traditional Dress, Hanbok(韓服).">
+  <meta name="twitter:image" content="https://isabel.co.kr/images/hero1.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
@@ -103,7 +118,10 @@
       letter-spacing: 0.02em;
       margin: 0 0 26px;
       text-shadow: 0 2px 30px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: opacity 0.25s ease;
     }
+    .hero-name:hover { opacity: 0.72; }
     .hero-tagline {
       font-size: clamp(1.05rem, 2.4vw, 1.5rem);
       margin: 0 0 10px;
@@ -233,7 +251,7 @@
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-center">
-      <h1 class="hero-name">SincereLee</h1>
+      <h1 class="hero-name" id="heroName">SincereLee</h1>
       <p class="hero-tagline">允 to record with sincerity — 瑞 to pass on the auspicious.</p>
       <p class="hero-sub">Researching digital archiving for Korean Traditional Dress, Hanbok(韓服).</p>
     </div>
@@ -261,6 +279,13 @@
 
   <script>
     (function () {
+      var heroName = document.getElementById('heroName');
+      if (heroName) {
+        heroName.addEventListener('click', function () {
+          alert('Bet you\'re wondering what this does. Ctrl+D (⌘+D) 💜');
+        });
+      }
+
       var slides = document.querySelectorAll('#slides .hero-slide');
       if (slides.length >= 2) {
         var i = 0;
@@ -284,4 +309,3 @@
   </script>
 </body>
 </html>
-                                

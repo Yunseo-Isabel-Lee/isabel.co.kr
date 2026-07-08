@@ -237,67 +237,10 @@
     .footer a:hover { color: var(--accent); }
     .footer .footer-meta { margin: 0; }
 
-    /* ===== BOOKMARK TOAST (top bar; appears when hero name is clicked) ===== */
-    .bookmark-toast {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 50;
-      background: #2e2440;
-      color: #fff;
-      transform: translateY(-100%);
-      transition: transform 0.32s ease;
-    }
-    .bookmark-toast.is-open { transform: translateY(0); }
-    .bookmark-toast-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 18px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .bookmark-toast-text { display: flex; flex-direction: column; gap: 4px; }
-    .bookmark-toast-site {
-      font-family: "Gowun Batang", serif;
-      font-size: 0.78rem;
-      color: #c9bde4;
-    }
-    .bookmark-toast-msg {
-      font-family: "Gowun Batang", serif;
-      font-size: 0.98rem;
-    }
-    .bookmark-toast-ok {
-      flex-shrink: 0;
-      background: #c9a9f5;
-      color: #2e2440;
-      border: none;
-      border-radius: 22px;
-      padding: 9px 24px;
-      font-family: "Playfair Display", serif;
-      font-size: 0.92rem;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      transition: opacity 0.18s ease;
-    }
-    .bookmark-toast-ok:hover { opacity: 0.82; }
-    @media (max-width: 560px) {
-      .bookmark-toast-inner { padding: 14px 18px; gap: 12px; }
-      .bookmark-toast-msg { font-size: 0.9rem; }
-    }
+    /* hero name is clickable; shows a browser bookmark alert on click */
   </style>
 </head>
 <body>
-  <div class="bookmark-toast" id="bookmarkToast">
-    <div class="bookmark-toast-inner">
-      <div class="bookmark-toast-text">
-        <span class="bookmark-toast-site">isabel.co.kr</span>
-        <span class="bookmark-toast-msg">여기까지 눌러본 당신, Ctrl+D(⌘+D)로 즐겨찾기에 추가 💜</span>
-      </div>
-      <button class="bookmark-toast-ok" id="bookmarkOk">확인</button>
-    </div>
-  </div>
-
   <nav class="nav" id="nav">
     <a class="nav-brand" href="/">SincereLee</a>
     <div class="nav-links">
@@ -352,17 +295,10 @@
 
   <script>
     (function () {
-      var toast = document.getElementById('bookmarkToast');
       var heroName = document.getElementById('heroName');
-      var okBtn = document.getElementById('bookmarkOk');
-      if (heroName && toast) {
+      if (heroName) {
         heroName.addEventListener('click', function () {
-          toast.classList.add('is-open');
-        });
-      }
-      if (okBtn && toast) {
-        okBtn.addEventListener('click', function () {
-          toast.classList.remove('is-open');
+          alert('여기 누르면 뭐 나오나 궁금하셨죠? Ctrl+D(⌘+D) 💜');
         });
       }
 

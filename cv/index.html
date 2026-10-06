@@ -6,308 +6,274 @@
   <title>Yunseo Isabel Lee — CV</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Mrs+Saint+Delafield&family=Noto+Serif+KR:wght@300;400;600&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
   <style>
+    /* ── Draft 5 · Misty Lake ──────────────────────────────
+       ref: cv5, cv6 (photo-topped sidebar, two-tone serif name, band, signature)
+       palette: color8 #CAD4EF #9EAFD2 #687CA2 #495977 · color7 #E8F3FE · color2 #0A1931 */
     :root {
-      --bg: #f7f3fb;
-      --ink: #2e2440;
-      --muted: #8a7ca8;
-      --accent: #7c4dff;
-      --accent-soft: #b39ddb;
-      --line: #e6dcf5;
-      --card: #ffffff;
+      --frost: #eef2fa;
+      --band: #e2e8f5;
+      --mist: #cad4ef;
+      --haze: #9eafd2;
+      --slate: #687ca2;
+      --deep: #495977;
+      --ink: #172036;
+      --text: #3c465e;
+      --muted: #7d88a2;
+      --line: #d9e0ef;
+      --paper: #ffffff;
+      --pad: clamp(24px, 5.5vw, 88px);
+      --display: "Bodoni Moda", "Noto Serif KR", serif;
+      --kr: "Noto Serif KR", "Gowun Batang", serif;
     }
     * { box-sizing: border-box; }
-    body {
-      font-family: "Gowun Batang", "Noto Serif KR", serif;
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 110px 24px 96px;
-      color: var(--ink);
-      line-height: 1.75;
-      background:
-        radial-gradient(1200px 600px at 50% -200px, #efe6fb 0%, rgba(239,230,251,0) 70%),
-        var(--bg);
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: var(--kr); color: var(--text); line-height: 1.75; background: var(--paper); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    .layout {
+      position: relative;
+      display: grid;
+      grid-template-columns: clamp(300px, 32vw, 470px) minmax(0, 1fr);
+      grid-template-rows: auto 1fr;
+      grid-template-areas: "top main" "side main";
       min-height: 100vh;
     }
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 10;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 22px 40px;
-      background: rgba(247, 243, 251, 0.85);
-      backdrop-filter: blur(8px);
-      color: var(--muted);
-    }
-    .nav a { color: inherit; text-decoration: none; }
-    .nav-brand {
-      font-family: "Playfair Display", serif;
-      font-size: 1.05rem;
-      letter-spacing: 0.04em;
-    }
-    .nav-links { display: flex; gap: 28px; }
+    .side-top, .side { background: var(--frost); }
+    .side-top { grid-area: top; }
+    .side { grid-area: side; padding: 52px 40px 64px; }
+    .main { grid-area: main; padding: 0 var(--pad) 72px; max-width: 980px; }
+
+    /* brand + nav */
+    .brandbar { display: flex; align-items: center; height: 76px; padding: 0 40px; }
+    .brandbar a { font-family: "Playfair Display", serif; font-size: 1.05rem; letter-spacing: 0.04em; color: var(--deep); }
+    .nav-links { position: absolute; top: 0; right: 0; z-index: 5; display: flex; align-items: center; gap: 30px; height: 76px; padding: 0 40px; }
     .nav-links a {
-      font-family: "Playfair Display", serif;
-      font-size: 0.92rem;
-      letter-spacing: 0.08em;
-      opacity: 0.92;
-      padding-bottom: 3px;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease, opacity 0.2s ease;
+      font-family: var(--display); font-size: 0.82rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--deep);
+      padding-bottom: 2px; border-bottom: 1px solid transparent; transition: border-color .2s ease, color .2s ease;
     }
-    .nav-links a:hover { opacity: 1; color: var(--accent); border-bottom-color: currentColor; }
-    .header {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 32px;
-      margin-bottom: 56px;
-    }
-    .avatar {
-      flex: 0 0 auto;
-      width: 220px;
-      height: 280px;
-      object-fit: cover;
-      object-position: center 20%;
-      border-radius: 16px;
-      box-shadow: 0 14px 32px rgba(74, 58, 107, 0.16);
-    }
-    .header-text { min-width: 0; }
-    h1 {
-      font-family: "Playfair Display", "Gowun Batang", serif;
-      font-size: 3.15rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      margin: 0 0 8px;
-      color: #4a3a6b;
-      white-space: nowrap;
-    }
-    .hanja {
-      font-size: 0.5em;
-      font-weight: 400;
-      color: var(--accent-soft);
-      margin-left: 0.4em;
-      letter-spacing: 0.05em;
-      vertical-align: baseline;
-    }
-    .subtitle {
-      color: var(--muted);
-      font-size: 1.53rem;
-      margin: 0;
-      white-space: nowrap;
-    }
-    .email {
-      margin: 12px 0 0;
-      font-family: "Playfair Display", serif;
-      font-size: 1rem;
-      letter-spacing: 0.02em;
-    }
-    .email a {
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.18s ease;
-    }
-    .email a:hover { color: var(--accent); }
-    .section-title {
-      font-family: "Playfair Display", serif;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--accent-soft);
-      margin: 0 0 18px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--line);
-    }
-    a.work {
-      position: relative;
-      display: block;
-      padding: 18px 22px;
-      margin-bottom: 12px;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      text-decoration: none;
-      color: var(--ink);
-      font-size: 1.05rem;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-    }
-    a.work::before {
-      content: "";
-      position: absolute;
-      left: 0; top: 14px; bottom: 14px;
-      width: 3px;
-      border-radius: 3px;
-      background: var(--accent);
-      opacity: 0;
-      transition: opacity 0.18s ease;
-    }
-    a.work:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent-soft);
-      box-shadow: 0 10px 28px rgba(124, 77, 255, 0.14);
-    }
-    a.work:hover::before { opacity: 1; }
+    .nav-links a:hover { color: var(--ink); border-bottom-color: currentColor; }
 
-    .section-title { margin-top: 48px; }
-    .section-title:first-of-type { margin-top: 0; }
+    .photo { margin: 0; background: var(--mist); }
+    .photo img { display: block; width: 100%; aspect-ratio: 5 / 6; object-fit: cover; object-position: center 18%; filter: saturate(0.85) contrast(1.02); }
 
-    .item {
-      display: flex;
-      gap: 20px;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--line);
+    /* sidebar sections */
+    .s-sec + .s-sec { margin-top: 48px; }
+    .s-h {
+      margin: 0 0 18px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--haze);
+      font-family: var(--display); font-weight: 500; font-size: 0.95rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--slate);
     }
-    .item:last-child { border-bottom: none; }
-    .item-meta {
-      flex: 0 0 168px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      margin: 0;
-      padding-top: 2px;
-    }
-    .item-body { min-width: 0; }
-    .item-title {
-      font-size: 1.05rem;
-      margin: 0;
-    }
-    .item-title .em {
-      color: var(--accent);
-      font-style: normal;
-    }
-    ol.item-list {
-      margin: 0;
-      padding-left: 1.3em;
-    }
-    ol.item-list > li { margin-bottom: 16px; }
-    ol.item-list > li:last-child { margin-bottom: 0; }
-    .item a, .item-list a {
-      color: var(--accent);
-      text-decoration: none;
-      word-break: break-all;
-    }
-    .item a:hover, .item-list a:hover { text-decoration: underline; }
-    .cite-title { font-style: italic; }
+    .contact { list-style: none; margin: 0; padding: 0; }
+    .contact li + li { margin-top: 12px; }
+    .contact a { display: flex; align-items: center; gap: 14px; font-size: 0.92rem; color: var(--text); transition: color .2s ease; }
+    .contact a:hover { color: var(--ink); }
+    .ico { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--haze); color: #fff; transition: background .2s ease; }
+    .contact a:hover .ico { background: var(--slate); }
+    .ico svg { width: 15px; height: 15px; }
 
+    .works { list-style: none; margin: 0; padding: 0; }
+    .works li + li { margin-top: 6px; }
+    .works a { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 6px 0; font-size: 0.98rem; font-weight: 600; color: var(--ink); }
+    .works a i { font-style: normal; font-family: var(--display); color: var(--haze); transition: transform .2s ease, color .2s ease; }
+    .works a:hover i { transform: translateX(4px); color: var(--slate); }
+
+    .s-item + .s-item { margin-top: 18px; }
+    .s-item h3 { margin: 0; font-size: 0.98rem; font-weight: 600; color: var(--ink); }
+    .s-item p { margin: 0; font-size: 0.88rem; color: var(--text); }
+    .s-item .sm { color: var(--muted); font-size: 0.84rem; }
+
+    /* main */
+    .hero { padding-top: 132px; }
+    .name { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(2.8rem, 5.6vw, 5.4rem); line-height: 1.02; letter-spacing: 0.08em; text-transform: uppercase; }
+    .name span { display: block; }
+    .name .l1 { color: var(--ink); }
+    .name .l2 { color: var(--haze); }
+    .kname { margin: 18px 0 0; font-size: 1.15rem; font-weight: 400; letter-spacing: 0.42em; color: var(--deep); }
+    .band {
+      margin: 30px calc(-1 * var(--pad)) 0;
+      padding: 12px var(--pad);
+      background: var(--band);
+      font-size: 0.95rem; letter-spacing: 0.2em; color: var(--deep);
+    }
+
+    .m-sec { margin-top: 64px; }
+    .m-h { margin: 0 0 26px; }
+    .m-h span {
+      font-family: var(--display); font-weight: 500; font-size: 1.12rem; letter-spacing: 0.36em; text-transform: uppercase; color: var(--slate);
+      background: linear-gradient(transparent 60%, var(--frost) 60%);
+      padding: 0 4px 0 2px;
+    }
+    .entry + .entry { margin-top: 24px; }
+    .entry h3 { margin: 0; font-size: 1.02rem; font-weight: 600; line-height: 1.6; color: var(--ink); word-break: keep-all; }
+    .entry .meta { margin: 2px 0 0; font-size: 0.9rem; color: var(--muted); }
+    .entry .meta b { font-weight: 400; color: var(--text); }
+    .entry .meta i { font-style: normal; margin: 0 10px; color: var(--mist); }
+    .entry .pt { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 1.12rem; line-height: 1.5; }
+    .entry .link { display: inline-block; margin-top: 8px; font-size: 0.86rem; color: var(--slate); border-bottom: 1px solid var(--mist); overflow-wrap: anywhere; transition: color .2s ease, border-color .2s ease; }
+    .entry .link:hover { color: var(--deep); border-bottom-color: var(--deep); }
+
+    .sign {
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+      margin-top: 88px; padding-top: 28px; border-top: 1px solid var(--line);
+    }
+    .sign p { margin: 0; font-size: 0.86rem; color: var(--muted); }
+    .sign .script { font-family: "Mrs Saint Delafield", cursive; font-size: 2.9rem; line-height: 1; color: var(--deep); }
+    .sign .script small { font-size: 0.62em; margin-right: 10px; color: var(--slate); }
+
+    .footer { padding: 26px 24px 34px; text-align: center; font-size: 0.8rem; letter-spacing: 0.06em; color: var(--muted); border-top: 1px solid var(--line); }
+    .footer a:hover { color: var(--deep); }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .photo img { animation: fade 1.2s ease both; }
+      .name span, .kname, .band { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+      .name .l2 { animation-delay: .1s; }
+      .kname { animation-delay: .18s; }
+      .band { animation-delay: .26s; }
+      @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; grid-template-areas: "top" "main" "side"; }
+      .photo img { aspect-ratio: 1 / 1; max-height: 78vh; }
+      .brandbar { padding: 0 20px; height: 64px; }
+      .nav-links { height: 64px; padding: 0 20px; gap: 18px; }
+      .hero { padding-top: 40px; }
+      .main { padding-bottom: 56px; }
+      .side { padding: 44px var(--pad) 56px; }
+      .sign { margin-top: 64px; }
+    }
     @media (max-width: 480px) {
-      body { padding: 92px 18px 72px; }
-      .header { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .avatar { width: 180px; height: 230px; }
-      h1 { font-size: 2.5rem; white-space: normal; }
-      .subtitle { font-size: 1.3rem; white-space: normal; }
-      .item { flex-direction: column; gap: 4px; }
-      .item-meta { flex-basis: auto; padding-top: 0; }
+      .kname { letter-spacing: 0.3em; }
+      .band { font-size: 0.86rem; letter-spacing: 0.1em; }
+      .entry .meta i { margin: 0 6px; }
+    }
+    @media print {
+      .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <a class="nav-brand" href="/">SincereLee</a>
-    <div class="nav-links">
-      <a href="/">Home</a>
-      <a href="/#about">About</a>
-      <a href="/en/cv">EN</a>
-    </div>
+  <nav class="nav-links" aria-label="Site">
+    <a href="/">Home</a>
+    <a href="/#about">About</a>
+    <a href="/en/cv">EN</a>
   </nav>
-  <div class="header">
-    <img class="avatar" src="/profile.jpg" alt="Yunseo Isabel Lee">
-    <div class="header-text">
-      <h1>이윤서<span class="hanja">李允瑞</span></h1>
-      <p class="subtitle">한국학중앙연구원 인문정보학과 박사과정</p>
-      <p class="email"><a href="mailto:lisabelys@gmail.com">lisabelys@gmail.com</a></p>
+
+  <div class="layout">
+    <div class="side-top">
+      <div class="brandbar"><a href="/">SincereLee</a></div>
+      <figure class="photo"><img src="https://isabel.co.kr/profile.jpg" alt="이윤서 프로필 사진"></figure>
     </div>
+
+    <aside class="side">
+      <section class="s-sec">
+        <h2 class="s-h">Contact</h2>
+        <ul class="contact">
+          <li><a href="mailto:lisabelys@gmail.com">
+            <span class="ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1.8" y="3.4" width="12.4" height="9.2" rx="1.4"/><path d="m2.4 4.4 5.6 4.4 5.6-4.4"/></svg></span>
+            lisabelys@gmail.com</a></li>
+          <li><a href="/">
+            <span class="ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4M8 1.8c1.8 1.9 2.6 3.9 2.6 6.2S9.8 12.3 8 14.2C6.2 12.3 5.4 10.3 5.4 8S6.2 3.7 8 1.8Z"/></svg></span>
+            isabel.co.kr</a></li>
+          <li><a href="/en/cv">
+            <span class="ico"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 4h10M3 8h7M3 12h10"/></svg></span>
+            English CV</a></li>
+        </ul>
+      </section>
+
+      <section class="s-sec">
+        <h2 class="s-h">Works</h2>
+        <ul class="works">
+          <li><a href="http://edu-omekas02.alab.kr/s/gitmu/page/about">‘깃’든 ‘무’늬 아카이브 <i>→</i></a></li>
+          <li><a href="/emuseum-facet.html">e뮤지엄 패싯 분류 <i>→</i></a></li>
+        </ul>
+      </section>
+
+      <section class="s-sec">
+        <h2 class="s-h">Conferences</h2>
+        <div class="s-item">
+          <h3>CIPA 2025 Symposium</h3>
+          <p>Yunseo Lee — Oral</p>
+          <p class="sm">Seoul, Korea · Aug. 2025</p>
+        </div>
+        <div class="s-item">
+          <h3>한복문화학회</h3>
+          <p>이윤서, 최연우 — Oral</p>
+          <p class="sm">Yongin, Korea · Apr. 2025</p>
+        </div>
+      </section>
+    </aside>
+
+    <main class="main">
+      <header class="hero">
+        <h1 class="name"><span class="l1">Yunseo</span><span class="l2">Isabel Lee</span></h1>
+        <p class="kname">이윤서 · 李允瑞</p>
+        <p class="band">한국학중앙연구원 인문정보학과 박사과정</p>
+      </header>
+
+      <section class="m-sec">
+        <h2 class="m-h"><span>Projects</span></h2>
+        <div class="entry">
+          <h3>전통문화유산-애니메이션 IP 융합 초실감 콘텐츠 기술개발</h3>
+          <p class="meta"><b>TRIC, Korea</b><i>|</i>Oct. 2026 – Dec. 2026</p>
+        </div>
+        <div class="entry">
+          <h3>K-info Hub, 한국민족문화대백과사전 주석 작업</h3>
+          <p class="meta"><b>Vaquita Lab, Korea</b><i>|</i>Sep. 2026 – Nov. 2026</p>
+        </div>
+        <div class="entry">
+          <h3>연구교육연계과제, 조선시대 흉배(胸背) 연구의 디지털 전환: 시맨틱 데이터 편찬과 정량 분석·AI 분류 방법론</h3>
+          <p class="meta"><b>한국학중앙연구원, Korea</b><i>|</i>Sep. 2026 – Feb. 2027</p>
+        </div>
+        <div class="entry">
+          <h3>국가유산 안내판 문안 정비 학술 용역</h3>
+          <p class="meta"><b>디지털인문학연구소, Korea</b><i>|</i>Jul. 2026 – Present</p>
+        </div>
+        <div class="entry">
+          <h3>국가유산 정보서비스 콘텐츠 개선 가이드라인 제작</h3>
+          <p class="meta"><b>KAIST, Korea</b><i>|</i>Jul. 2025 – Dec. 2025</p>
+        </div>
+      </section>
+
+      <section class="m-sec">
+        <h2 class="m-h"><span>Publications</span></h2>
+        <div class="entry">
+          <h3 class="pt">“Database Design for a Hanbok Data Archive: Focused on the Seok Juseon Memorial Museum Collection of Dankook University”</h3>
+          <p class="meta"><b>Lee, Y. S.</b><i>|</i>ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences (2025).</p>
+          <a class="link" href="https://isprs-annals.copernicus.org/articles/X-M-2-2025/229/2025/isprs-annals-X-M-2-2025-229-2025.html">isprs-annals.copernicus.org/<wbr>articles/<wbr>X-M-2-2025/<wbr>229/<wbr>2025</a>
+        </div>
+      </section>
+
+      <section class="m-sec">
+        <h2 class="m-h"><span>Experiences</span></h2>
+        <div class="entry">
+          <h3>한복상점</h3>
+          <p class="meta"><b>기획 및 진행</b><i>|</i>Apr. 2024 – Aug. 2024</p>
+        </div>
+        <div class="entry">
+          <h3>〈12인 12색, 겨울에 꽃피우다〉 온라인 전시회</h3>
+          <p class="meta"><b>참여작가</b><i>|</i>Dec. 2023 – Jan. 2024</p>
+        </div>
+        <div class="entry">
+          <h3>〈무신진찬 여령옷, 손으로 짓고 3D 디지털로 입히다〉</h3>
+          <p class="meta"><b>보조 큐레이터</b><i>|</i>Sep. 2023 – Oct. 2023</p>
+        </div>
+        <div class="entry">
+          <h3>한복상점</h3>
+          <p class="meta"><b>기획 및 진행</b><i>|</i>Apr. 2023 – Aug. 2023</p>
+        </div>
+      </section>
+
+      <div class="sign">
+        <p>允, 진실하게 기록하고 — 瑞, 상서로움을 전하다.</p>
+        <span class="script"><small>Sincerely,</small>Yunseo Lee</span>
+      </div>
+    </main>
   </div>
 
-  <p class="section-title">Works</p>
-  <a class="work" href="http://edu-omekas02.alab.kr/s/gitmu/page/about">'깃'든 '무'늬 아카이브</a>
-  <a class="work" href="/emuseum-facet.html">e뮤지엄 패싯 분류</a>
-
-<p class="section-title">Projects</p>
-  <div class="item">
-    <p class="item-meta">Oct.2026 - Dec.2026</p>
-    <div class="item-body">
-      <p class="item-title">전통문화유산-애니메이션 IP 융합 초실감 콘텐츠 기술개발</p>
-      <p class="item-meta" style="flex:none">TRIC, Korea</p>
-    </div>
-  </div>
-  <div class="item">
-    <p class="item-meta">Sep. 2026 - Nov. 2026</p>
-    <div class="item-body">
-      <p class="item-title">K-info Hub, 한국민족문화대백과사전 주석 작업</p>
-      <p class="item-meta" style="flex:none">Vaquita Lab, Korea</p>
-    </div>
-  </div>
-  <div class="item">
-    <p class="item-meta">Sep. 2026 - Feb. 2027</p>
-    <div class="item-body">
-      <p class="item-title">연구교육연계과제, 조선시대 흉배(胸背) 연구의 디지털 전환: 시맨틱 데이터 편찬과 정량 분석·AI 분류 방법론</p>
-      <p class="item-meta" style="flex:none">한국학중앙연구원, Korea</p>
-    </div>
-  </div>
-  <div class="item">
-    <p class="item-meta">Jul. 2026 – Present</p>
-    <div class="item-body">
-      <p class="item-title">국가유산 안내판 문안 정비 학술 용역</p>
-      <p class="item-meta" style="flex:none">디지털인문학연구소, Korea</p>
-    </div>
-  </div>
-  <div class="item">
-    <p class="item-meta">Jul. 2025 – Dec. 2025</p>
-    <div class="item-body">
-      <p class="item-title">국가유산 정보서비스 콘텐츠 개선 가이드라인 제작</p>
-      <p class="item-meta" style="flex:none">KAIST, Korea</p>
-    </div>
-  </div>
-
-  <p class="section-title">Publications</p>
-  <ol class="item-list">
-    <li>
-      Lee, Y. S., <span class="cite-title">"Database Design for a Hanbok Data Archive: Focused on the Seok Juseon Memorial Museum Collection of Dankook University"</span>, ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences (2025).
-      <br>
-      <a href="https://isprs-annals.copernicus.org/articles/X-M-2-2025/229/2025/isprs-annals-X-M-2-2025-229-2025.html">isprs-annals.copernicus.org/articles/X-M-2-2025/229/2025</a>
-    </li>
-  </ol>
-
-  <p class="section-title">Conferences</p>
-  <div class="item">
-    <p class="item-meta">Apr. 2025</p>
-    <div class="item-body">
-      <p class="item-title">이윤서, 최연우, 한복문화학회, Yongin, Korea — Oral</p>
-    </div>
-  </div>
-  <div class="item">
-    <p class="item-meta">Aug. 2025</p>
-    <div class="item-body">
-      <p class="item-title">Yunseo Lee, CIPA 2025 Symposium, Seoul, Korea — Oral</p>
-    </div>
-  </div>
-
-  <p class="section-title">Experiences</p>
-  <div class="item">
-    <p class="item-meta">Dec. 2023 – Jan. 2024</p>
-    <div class="item-body">
-      <p class="item-title">참여작가, &lt;12인 12색, 겨울에 꽃피우다&gt; 온라인 전시회</p>
-    </div>
-  </div>
-  <div class="item">
-    <p class="item-meta">Apr. 2024 – Aug. 2024</p>
-    <div class="item-body">
-      <p class="item-title">기획 및 진행, 한복상점</p>
-    </div>
-  </div>
-  <div class="item">
-    <p class="item-meta">Sep. 2023 – Oct. 2023</p>
-    <div class="item-body">
-      <p class="item-title">보조 큐레이터, &lt;무신진찬 여령옷, 손으로 짓고 3D 디지털로 입히다&gt;</p>
-    </div>
-  </div>
-  <div class="item">
-    <p class="item-meta">Apr. 2023 – Aug. 2023</p>
-    <div class="item-body">
-      <p class="item-title">기획 및 진행, 한복상점</p>
-    </div>
-  </div>
+  <footer class="footer">SincereLee · © 2026 Yunseo Isabel Lee · <a href="mailto:lisabelys@gmail.com">lisabelys@gmail.com</a></footer>
 </body>
 </html>

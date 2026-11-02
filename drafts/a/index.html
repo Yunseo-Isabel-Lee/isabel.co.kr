@@ -196,31 +196,15 @@
     .g-media::before { content: ""; position: absolute; top: -22px; left: -22px; right: 22px; bottom: 22px; z-index: -1; border: 1px solid rgba(198, 198, 232, .25); }
     .g-frame { aspect-ratio: 3 / 5; background: var(--navy); }
     .g-frame img { object-position: 50% 25%; filter: saturate(.92); }
-    .ring {
-      --c: clamp(120px, 11vw, 168px);
-      position: absolute; left: calc(100% - var(--c) * .22); bottom: 12%;
-      display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px;
-      width: var(--c); height: var(--c); padding-left: calc(var(--c) * .26);
-      border: 1px solid rgba(244, 239, 231, .75); border-radius: 50%;
-      background: rgba(11, 20, 36, .45); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-      color: var(--cream); isolation: isolate;
-      transition: border-color .6s var(--ease);
-    }
-    .ring::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 50%; background: rgba(242, 223, 229, .16); transform: scale(.001); transition: transform .9s var(--ease); }
-    .ring:hover, .ring:focus-visible { border-color: var(--blush); }
-    .ring:hover::before, .ring:focus-visible::before { transform: scale(1); }
-    .ring-kr { max-width: 6.4em; font-family: var(--hanja); font-size: .84rem; line-height: 1.6; letter-spacing: .08em; }
-    .ring-kr .arr { display: inline-block; transition: transform .6s var(--ease); }
-    .ring:hover .arr { transform: translateX(6px); }
     .g-text { grid-column: 7 / span 5; }
-    .g-eyebrow { display: flex; align-items: center; gap: 16px; color: var(--mist); }
-    .g-eyebrow i { display: block; width: 44px; height: 1px; background: currentColor; opacity: .5; }
-    .g-title { margin: .35em 0 .45em; font-family: var(--italic); font-style: italic; font-weight: 300; font-size: clamp(3.2rem, 6.2vw, 6.4rem); line-height: 1; color: var(--cream); }
-    .g-p { max-width: 30em; font-family: var(--hanja); font-size: clamp(.96rem, 1.04vw, 1.05rem); line-height: 1.95; color: rgba(244, 239, 231, .86); }
-    .g-sign { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-top: clamp(40px, 4.5vw, 64px); }
-    .g-sign .sc { font-family: var(--italic); font-weight: 300; font-size: 1.75rem; line-height: 1; color: var(--blush); }
-    .g-sign .sc em { font-style: italic; }
-    .g-sign .nm { font-family: var(--hanja); font-size: .86rem; letter-spacing: .4em; color: var(--mist); }
+    .hello-title { font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 4.4vw, 3.8rem); line-height: 1; letter-spacing: .03em; text-transform: uppercase; color: var(--cream); }
+    .hello-p { margin-top: 22px; max-width: 32em; font-size: .92rem; line-height: 1.95; color: rgba(244, 239, 231, .78); }
+    .field { display: flex; align-items: stretch; gap: 10px; margin-top: 32px; max-width: 30em; }
+    .field span { flex: 1; min-width: 0; padding: 11px 16px; border: 1px solid rgba(244, 239, 231, .55); border-radius: 8px; font-family: var(--label); font-size: .8rem; letter-spacing: .04em; color: var(--cream); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: border-color .4s; }
+    .field b { display: grid; place-items: center; padding: 0 20px; border-radius: 8px; background: var(--cream); color: var(--night); font-family: var(--label); font-weight: 500; font-size: .6rem; letter-spacing: .26em; text-transform: uppercase; transition: background .4s; }
+    .field:hover span, .field:focus-visible span { border-color: var(--cream); }
+    .field:hover b, .field:focus-visible b { background: var(--blush); }
+    .hello .more { margin-top: 28px; color: var(--cream); }
 
     /* ===== FOOTER — name and contact only, continuing the navy ===== */
     .foot { background: #0b1424; color: #c6c6e8; padding: 0 0 clamp(32px, 4vw, 48px); }
@@ -298,8 +282,6 @@
 
       .g-media { grid-column: 1 / span 8; }
       .g-media::before { top: -12px; left: -12px; right: 12px; bottom: 12px; }
-      .ring { --c: 116px; }
-      .ring-kr { font-size: .78rem; }
       .g-text { grid-column: 1 / -1; margin-top: 72px; }
     }
     @media (max-width: 520px) {
@@ -329,8 +311,9 @@
   </nav>
 
   <header class="hero" id="top">
-    <div class="hero-photo ph" id="slides" role="img" aria-label="대청마루와 정자에서 찍은 한복 사진들">
-      <div class="slide is-active" style="--pos:50% 50%;background-image:url('https://isabel.co.kr/images/hero7.jpg')"></div>
+    <div class="hero-photo ph" id="slides" role="img" aria-label="툇마루와 대청, 정자에서 찍은 한복 사진들">
+      <div class="slide is-active" style="--pos:50% 30%;background-image:url('https://isabel.co.kr/images/hero1.jpg')"></div>
+      <div class="slide" style="--pos:50% 50%" data-bg="https://isabel.co.kr/images/hero7.jpg"></div>
       <div class="slide" style="--pos:55% 50%" data-bg="https://isabel.co.kr/images/hero4.jpg"></div>
       <div class="slide" style="--pos:50% 50%" data-bg="https://isabel.co.kr/images/hero3.jpg"></div>
     </div>
@@ -403,16 +386,14 @@
       <div class="wrap hello-grid">
         <div class="g-media">
           <figure class="g-frame ph rv"><img src="https://isabel.co.kr/profile.jpg" alt="이윤서 프로필 사진" width="1200" height="1500" loading="lazy" decoding="async"></figure>
-          <a class="ring rv-fade" href="/cv" style="--d:.5s">
-            <span class="label" aria-hidden="true">CV</span>
-            <span class="ring-kr">전체 이력 보기 <span class="arr">→</span></span>
-          </a>
         </div>
         <div class="g-text">
-          <p class="label g-eyebrow rv"><i></i> Yunseo Isabel Lee</p>
-          <h2 class="g-title rv" id="helloTitle" style="--d:.08s">Hello,</h2>
-          <p class="g-p rv" style="--d:.16s">안녕하세요, 이윤서입니다. 이렇게 찾아와 주셔서 반갑습니다. 흩어진 한복 자료를 모아 아카이브로 엮는 연구를 하다 보니, 제 이야기도 한곳에 모아두고 싶었습니다. 인생 첫 사이트라 곳곳이 아직 공사중이지만, 기록이란 원래 계속 더해지는 법이니까요. 하나씩 채워갈테니 가끔 들러 달라지는 모습을 지켜봐 주세요.</p>
-          <p class="g-sign rv" style="--d:.24s"><span class="sc">Sincere<em>Lee</em>,</span><span class="nm">이윤서</span></p>
+          <h2 class="hello-title rv" id="helloTitle">Hello,</h2>
+          <p class="hello-p rv" style="--d:.08s">안녕하세요, 이윤서입니다. 이렇게 찾아와 주셔서 반갑습니다. 흩어진 한복 자료를 모아 아카이브로 엮는 연구를 하다 보니, 제 이야기도 한곳에 모아두고 싶었습니다. 인생 첫 사이트라 곳곳이 아직 공사중이지만, 기록이란 원래 계속 더해지는 법이니까요. 하나씩 채워갈테니 가끔 들러 달라지는 모습을 지켜봐 주세요.</p>
+          <div class="rv" style="--d:.16s">
+            <a class="field" href="mailto:lisabelys@gmail.com"><span>lisabelys@gmail.com</span><b>Mail</b></a>
+            <a class="more" href="/cv">CV · 전체 이력 보기<svg viewBox="0 0 34 8" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 4h33M29.5 1 33 4l-3.5 3"/></svg></a>
+          </div>
         </div>
       </div>
     </section>

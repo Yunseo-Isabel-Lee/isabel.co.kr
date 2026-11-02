@@ -21,8 +21,9 @@
   <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@400;500&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@400;500&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="/assets/site-header.css?v=3">
   <link rel="stylesheet" href="/assets/lang-menu.css?v=2">
   <script src="/assets/site-header.js?v=2" defer></script>
   <style>
@@ -96,64 +97,6 @@
       pointer-events: none;
       background: repeating-linear-gradient(90deg, rgba(198, 198, 232, .075) 0 1px, transparent 1px 25%);
     }
-
-    /* ===== NAV — the gallery's own header: clear at first, navy glass once scrolled ===== */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 60;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 28px var(--gutter);
-      color: var(--cream);
-      border-bottom: 1px solid transparent;
-      transition: padding .6s var(--ease), background-color .6s var(--ease), border-color .6s var(--ease);
-      /* language menu colours (assets/lang-menu.css) */
-      --lm-ink: var(--cream); --lm-bg: rgba(21, 35, 59, .97); --lm-line: rgba(198, 198, 232, .16); --lm-hover: rgba(198, 198, 232, .12); --lm-shadow: rgba(0, 0, 0, .55);
-    }
-    .nav.is-scrolled {
-      padding-top: 15px;
-      padding-bottom: 15px;
-      background-color: rgba(11, 20, 36, .8);
-      -webkit-backdrop-filter: blur(16px) saturate(1.15);
-      backdrop-filter: blur(16px) saturate(1.15);
-      border-bottom-color: var(--hair);
-    }
-    .nav a { text-decoration: none; }
-    .brand {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: 1.4rem;
-      line-height: 1;
-      letter-spacing: .02em;
-      transition: opacity .4s;
-    }
-    .brand i { font-weight: 300; color: var(--blush); }
-    .brand:hover { opacity: .75; }
-    .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 48px); }
-    .nav-links a {
-      position: relative;
-      padding: 6px 0;
-      font-family: var(--sans);
-      font-size: .68rem;
-      letter-spacing: .38em;
-      text-transform: uppercase;
-    }
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0; right: .38em; bottom: 0;
-      height: 1px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform .6s var(--ease);
-    }
-    .nav-links a:hover::after,
-    .nav-links a:focus-visible::after,
-    .nav-links a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
 
     /* ===== UNDER CONSTRUCTION ===== */
     .wip {
@@ -380,12 +323,6 @@
     }
 
     @media (max-width: 720px) {
-      .nav { padding: 20px var(--gutter); }
-      .nav.is-scrolled { padding-top: 13px; padding-bottom: 13px; }
-      .brand { font-size: 1.25rem; }
-      .nav-links { gap: 18px; }
-      .nav-links a { font-size: .62rem; letter-spacing: .32em; }
-
       .wip { padding-top: 120px; }
       .wip-head { flex-direction: column; align-items: flex-start; }
       .wip-photo { grid-column: 1 / span 11; }
@@ -413,8 +350,8 @@
   </style>
 </head>
 <body>
-  <nav class="nav" id="nav" aria-label="주 메뉴">
-    <a class="brand" href="/">Sincere<i>Lee</i></a>
+  <nav class="nav theme-night" id="nav" aria-label="주 메뉴">
+    <a class="brand" href="/">SincereLee</a>
     <div class="nav-links">
       <a href="/#about">About</a>
       <a href="/gallery" aria-current="page">Gallery</a>

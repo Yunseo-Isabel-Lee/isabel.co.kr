@@ -1,9 +1,13 @@
-/* Home header — white glass over the editorial home page (Korean and English).
-   Name on the left, About · Gallery · CV and the globe (assets/lang-menu.css) on the right.
-   It stays clear over the hero photos and frosts once they have scrolled past (assets/site-header.js). */
+/* Site header — identical on every page: the same type (Italiana name, Jost menu), the same size,
+   and the name, About · Gallery · CV and the globe (assets/lang-menu.css) in the same places.
+   Only the colours follow the page:
+     default       home: clear over the hero photos, white glass once they have scrolled past
+     .theme-night  gallery: clear at first, navy glass once scrolled, cream lettering
+     .theme-ice    CV: the CV's lavender bar throughout (no rule beneath), plum lettering
+   .is-scrolled is set by assets/site-header.js. */
 .nav {
   --h-ink: #161412;
-  --h-bg: rgba(255, 255, 255, .9);
+  --h-glass: rgba(255, 255, 255, .9);
   --h-line: rgba(22, 20, 18, .14);
   --h-pad: clamp(20px, 5vw, 80px);
   --h-ease: cubic-bezier(.22, .61, .36, 1);
@@ -16,7 +20,7 @@
 }
 .nav.is-scrolled {
   padding-top: 14px; padding-bottom: 14px;
-  background: var(--h-bg);
+  background: var(--h-glass);
   -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1);
   border-bottom-color: var(--h-line);
 }
@@ -24,9 +28,10 @@
 .nav .brand {
   font-family: "Italiana", "Cormorant Garamond", Georgia, serif; font-weight: 400;
   font-size: 1.5rem; line-height: 1; letter-spacing: .06em;
-  opacity: 0; pointer-events: none; transition: opacity .5s var(--h-ease);
+  transition: opacity .5s var(--h-ease);
 }
-.nav.is-scrolled .brand { opacity: 1; pointer-events: auto; }
+/* the home hero already shows the name, so the header's appears once the hero has scrolled past */
+.nav.has-hero:not(.is-scrolled) .brand { opacity: 0; pointer-events: none; }
 .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 44px); }
 .nav-links a {
   position: relative; padding: 6px 0;
@@ -39,10 +44,23 @@
 }
 .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
 
+/* gallery: navy glass, cream lettering */
+.nav.theme-night {
+  --h-ink: #f4efe7; --h-glass: rgba(11, 20, 36, .8); --h-line: rgba(198, 198, 232, .16);
+  --lm-ink: #f4efe7; --lm-bg: rgba(21, 35, 59, .97); --lm-line: rgba(198, 198, 232, .16); --lm-hover: rgba(198, 198, 232, .12); --lm-shadow: rgba(0, 0, 0, .55);
+}
+/* CV: the lavender bar is there from the start; no rule beneath */
+.nav.theme-ice {
+  --h-ink: #3e354e; --h-glass: rgba(227, 224, 232, .72); --h-line: transparent;
+  --lm-ink: #3e354e; --lm-bg: rgba(249, 248, 250, .97); --lm-line: rgba(62, 53, 78, .12); --lm-hover: #e7e4ee; --lm-shadow: rgba(46, 38, 62, .3);
+  background: var(--h-glass);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+}
+
 @media (max-width: 820px) {
   .nav { padding: 20px var(--h-pad); }
   /* on the home page the header sits over the hero photo at first */
-  .nav:not(.is-scrolled) { color: #fff; text-shadow: 0 1px 10px rgba(22, 20, 18, .35); }
+  .nav.has-hero:not(.is-scrolled) { color: #fff; text-shadow: 0 1px 10px rgba(22, 20, 18, .35); }
 }
 @media (max-width: 520px) {
   .nav-links { gap: 16px; }

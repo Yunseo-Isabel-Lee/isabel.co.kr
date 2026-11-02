@@ -1,5 +1,6 @@
-/* Site header — shared by every page.
-   Frosts once the hero photo (home only, #slides) has scrolled past; pages without one stay frosted.
+/* Site header behaviour — shared by every page (each page keeps its own header look).
+   Adds .is-scrolled once the home hero photo (#slides) has scrolled past, or after a short scroll on
+   pages without one; each page's CSS decides what that looks like.
    The globe opens the language menu; a click outside, Escape or picking a language closes it. */
 (function () {
   'use strict';
@@ -9,7 +10,7 @@
   var hero = document.getElementById('slides'), ticking = false;
   function update() {
     ticking = false;
-    nav.classList.toggle('is-scrolled', !hero || hero.getBoundingClientRect().bottom < nav.offsetHeight);
+    nav.classList.toggle('is-scrolled', hero ? hero.getBoundingClientRect().bottom < nav.offsetHeight : (window.scrollY || window.pageYOffset) > 8);
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   window.addEventListener('resize', update);

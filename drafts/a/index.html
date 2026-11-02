@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>시안 A · Editorial — SincereLee</title>
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Jost:wght@400;500&family=Noto+Serif+KR:wght@200;300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <style>
+    /* 시안 A · Editorial — white page, warm sand light, hairline display caps that overlap the photographs */
+    :root {
+      --paper: #ffffff;
+      --sand: #ebe2d7;
+      --sand-2: #dccdbb;
+      --ink: #161412;
+      --ink-2: #4f4942;
+      --muted: #8a8279;
+      --line: rgba(22, 20, 18, .14);
+
+      --display: "Italiana", "Cormorant Garamond", Georgia, serif;
+      --italic: "Cormorant Garamond", Georgia, serif;
+      --label: "Jost", "Pretendard Variable", Pretendard, sans-serif;
+      --kr: "Pretendard Variable", Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      --hanja: "Noto Serif KR", serif;
+
+      --pad: clamp(20px, 5vw, 80px);
+      --gap: clamp(14px, 1.8vw, 28px);
+      --ease: cubic-bezier(.22, .61, .36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; overflow-x: hidden;
+      background: var(--paper); color: var(--ink);
+      font-family: var(--kr); font-weight: 300; line-height: 1.85;
+      word-break: keep-all; overflow-wrap: break-word;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p, figure, ol { margin: 0; }
+    ::selection { background: var(--sand-2); color: var(--ink); }
+    :focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+
+    .wrap { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 var(--pad); }
+    .label { font-family: var(--label); font-weight: 400; font-size: .62rem; line-height: 1.6; letter-spacing: .42em; text-transform: uppercase; }
+    .h-small { font-family: var(--label); font-weight: 500; font-size: .74rem; letter-spacing: .26em; text-transform: uppercase; color: var(--ink); }
+    .ph { overflow: hidden; background: var(--sand); }
+    .ph img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* "GET STARTED ——→" link */
+    .more {
+      display: inline-flex; align-items: center; gap: 14px;
+      padding: 6px 0;
+      font-family: var(--label); font-weight: 400; font-size: .62rem; letter-spacing: .34em; text-transform: uppercase;
+      border-bottom: 1px solid currentColor;
+    }
+    .more svg { width: 34px; height: 8px; transition: transform .6s var(--ease); }
+    .more:hover svg, .more:focus-visible svg { transform: translateX(6px); }
+
+    /* ===== NAV — inverts against whatever is under it ===== */
+    .nav {
+      position: fixed; inset: 0 0 auto; z-index: 50;
+      display: flex; justify-content: space-between; align-items: center; gap: 24px;
+      padding: 26px var(--pad);
+      color: #fff; mix-blend-mode: difference;
+      pointer-events: none;
+    }
+    .nav a { pointer-events: auto; }
+    .brand { font-family: var(--display); font-size: 1.3rem; line-height: 1; letter-spacing: .06em; }
+    .nav-links { display: flex; gap: clamp(18px, 3vw, 44px); }
+    .nav-links a { font-family: var(--label); font-size: .6rem; letter-spacing: .38em; text-transform: uppercase; }
+
+    /* ===== HERO — photo to the left, the name straddling its edge ===== */
+    .hero { position: relative; display: grid; grid-template-columns: 58% minmax(0, 1fr); min-height: 100vh; min-height: 100svh; background: var(--paper); }
+    .hero-photo { grid-column: 1; grid-row: 1; height: 100vh; height: 100svh; }
+    .hero-photo img { object-position: 50% 30%; }
+    .hero-copy { grid-column: 2; grid-row: 1; align-self: center; margin-left: calc(-1 * clamp(70px, 10vw, 170px)); padding: 120px var(--pad) 80px 0; }
+    .hero-kicker { margin: 0 0 22px .3em; color: #fff; mix-blend-mode: difference; }
+    .hero-title {
+      font-family: var(--display); font-weight: 400;
+      font-size: clamp(4.2rem, 10.5vw, 11rem); line-height: .84; letter-spacing: .02em; text-transform: uppercase;
+      color: #fff; mix-blend-mode: difference; cursor: pointer;
+    }
+    .hero-title span { display: block; }
+    .hero-title span + span { padding-left: 1.1em; }
+    .hero-tag { margin-top: clamp(34px, 4vw, 56px); padding-left: clamp(70px, 10vw, 170px); font-size: clamp(.95rem, 1.1vw, 1.05rem); line-height: 1.9; color: var(--ink); }
+    .hero-sub { margin-top: 8px; padding-left: clamp(70px, 10vw, 170px); font-size: .86rem; color: var(--muted); }
+    .hero .more { margin: clamp(30px, 3.6vw, 48px) 0 0 clamp(70px, 10vw, 170px); }
+
+    /* ===== ABOUT — text and a landscape on the left, the stacked name and a portrait on the right ===== */
+    .about { padding: clamp(110px, 12vw, 190px) 0 clamp(90px, 10vw, 150px); }
+    .about-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); align-items: start; }
+    .about-text { grid-column: 1 / span 6; padding-top: clamp(60px, 9vw, 150px); }
+    .about-text .lead { margin-top: 18px; max-width: 30em; font-size: clamp(1.05rem, 1.3vw, 1.2rem); line-height: 1.8; font-weight: 400; color: var(--ink); }
+    .about-text .lead em { font-style: normal; border-bottom: 1px solid var(--sand-2); }
+    .about-text .body { margin-top: 14px; max-width: 32em; font-size: .9rem; color: var(--ink-2); }
+    .about-text .body i { font-family: var(--italic); font-size: 1.1em; }
+    .about-photo { margin-top: clamp(40px, 5vw, 64px); width: 92%; aspect-ratio: 4 / 3; }
+    .about-side { grid-column: 8 / span 5; position: relative; }
+    .side-photo { width: 64%; margin-left: auto; aspect-ratio: 4 / 5; }
+    .side-photo img { object-position: 45% 40%; }
+    .vword {
+      position: absolute; left: 0; bottom: -5%;
+      writing-mode: vertical-rl; transform: rotate(180deg);
+      font-family: var(--display); font-weight: 400; font-size: clamp(3.4rem, 6.4vw, 7rem); line-height: .8; text-transform: uppercase; letter-spacing: .02em;
+      color: var(--ink);
+    }
+    /* each word is its own column; after the half-turn they read bottom-up, SINCERE first, LEE set a little higher */
+    .vword span { display: block; }
+    .vword span:last-child { padding-top: 2.4em; }
+
+    /* ===== NAMES — the three syllables, side by side ===== */
+    .names { padding: 0 0 clamp(110px, 12vw, 180px); text-align: center; }
+    .names-q { font-size: clamp(1rem, 1.2vw, 1.1rem); color: var(--ink); }
+    .names-list { list-style: none; padding: 0; margin: clamp(40px, 5vw, 64px) auto 0; max-width: 1080px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .names-list li { padding: 8px clamp(18px, 3vw, 44px); }
+    .names-list li + li { border-left: 1px solid var(--line); }
+    .names-list b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(3rem, 5vw, 4.6rem); line-height: 1; text-transform: uppercase; color: var(--ink); }
+    .names-list b.hj { font-family: var(--hanja); font-weight: 200; }
+    .names-list small { display: block; margin-top: 12px; font-size: .74rem; letter-spacing: .4em; color: var(--muted); }
+    .names-list span { display: block; margin-top: 18px; font-size: .88rem; line-height: 1.85; color: var(--ink-2); }
+    .names-list em { font-style: normal; color: var(--ink); }
+    .names-close { margin-top: clamp(40px, 5vw, 60px); font-size: .92rem; color: var(--ink); }
+
+    /* ===== 允 & 瑞 — sand light, the characters around a portrait ===== */
+    .echo {
+      position: relative; overflow: hidden;
+      background: linear-gradient(118deg, #d4c3ae 0%, #e7dccf 26%, #f5f0ea 52%, #ffffff 78%);
+    }
+    .echo-stage { position: relative; max-width: 1320px; height: clamp(620px, 92vh, 940px); margin: 0 auto; }
+    .echo-w { position: absolute; font-family: var(--hanja); font-weight: 200; font-size: clamp(10rem, 25vw, 23rem); line-height: 1; }
+    .echo-w.w1 { left: 20%; top: 2%; color: var(--ink); }
+    .echo-w.w2 { left: 55%; top: 34%; color: #fff; mix-blend-mode: difference; }
+    .echo-and { position: absolute; left: 28%; top: 56%; font-family: var(--italic); font-style: italic; font-weight: 300; font-size: clamp(1.6rem, 2.6vw, 2.4rem); color: var(--ink-2); }
+    .echo-fig { position: absolute; left: 50%; top: 9%; width: clamp(230px, 25vw, 360px); aspect-ratio: 2 / 3; transform: translateX(-50%); box-shadow: 0 40px 80px -40px rgba(60, 40, 20, .45); }
+    .echo-fig img { object-position: 50% 40%; }
+    .echo-copy { position: absolute; left: var(--pad); bottom: 9%; max-width: 21em; }
+    .echo-copy p { margin-top: 14px; font-size: .9rem; color: var(--ink-2); }
+    .echo-copy .more { margin-top: 26px; }
+
+    /* ===== ARCHIVE — the title slides under two staggered photos ===== */
+    .archive { padding: clamp(120px, 13vw, 200px) 0 clamp(100px, 11vw, 170px); }
+    .arch-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); align-items: start; }
+    .arch-title {
+      grid-column: 1 / span 9; grid-row: 1; position: relative; z-index: 1;
+      font-family: var(--display); font-weight: 400; font-size: clamp(3.6rem, 8.6vw, 9.2rem); line-height: .9; letter-spacing: .02em; text-transform: uppercase;
+    }
+    .arch-title span { display: block; }
+    .arch-title span + span { padding-left: .5em; }
+    .arch-ph { position: relative; }
+    .arch-ph.p1 { grid-column: 1 / span 4; grid-row: 2; z-index: 2; margin-top: calc(-1 * clamp(1.6rem, 4vw, 4.2rem)); aspect-ratio: 1 / 1.08; }
+    .arch-ph.p1 img { object-position: 60% 50%; }
+    .arch-ph.p2 { grid-column: 4 / span 3; grid-row: 2; z-index: 3; margin-top: clamp(80px, 11vw, 170px); aspect-ratio: 3 / 4.2; box-shadow: -20px 30px 60px -36px rgba(40, 30, 20, .4); }
+    .arch-ph.p2 img { object-position: 50% 55%; }
+    .arch-copy { grid-column: 8 / span 4; grid-row: 2; margin-top: clamp(30px, 4vw, 60px); }
+    .arch-copy p { font-size: .94rem; color: var(--ink-2); }
+    .arch-copy p:first-child { font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.85; color: var(--ink); font-weight: 400; }
+    .arch-copy p + p { margin-top: 18px; }
+    .arch-copy .more { margin-top: 30px; }
+
+    /* ===== HELLO — rounded sand card ===== */
+    .hello { padding: 0 0 clamp(60px, 7vw, 100px); }
+    .card {
+      display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: end; gap: clamp(20px, 3vw, 48px);
+      padding: clamp(18px, 2.2vw, 30px);
+      border-radius: 26px;
+      background: linear-gradient(100deg, #f3eee7 0%, #e9dfd3 55%, #d9c8b4 100%);
+    }
+    .card-copy { padding: clamp(16px, 3vw, 44px); }
+    .card-title { font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 4.4vw, 3.8rem); line-height: 1; letter-spacing: .03em; text-transform: uppercase; }
+    .card-copy p { margin-top: 20px; max-width: 32em; font-size: .92rem; color: var(--ink-2); }
+    .field { display: flex; align-items: stretch; gap: 10px; margin-top: 30px; max-width: 30em; }
+    .field span { flex: 1; min-width: 0; padding: 11px 16px; border: 1px solid var(--ink); border-radius: 8px; font-family: var(--label); font-size: .8rem; letter-spacing: .04em; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .field b { display: grid; place-items: center; padding: 0 20px; border-radius: 8px; background: var(--ink); color: #fff; font-family: var(--label); font-weight: 500; font-size: .6rem; letter-spacing: .26em; text-transform: uppercase; transition: background .4s; }
+    .field:hover b, .field:focus-visible b { background: #3b352f; }
+    .card .more { margin-top: 26px; }
+    .card-photo { border-radius: 18px; aspect-ratio: 4 / 5; }
+    .card-photo img { object-position: 50% 22%; }
+
+    /* ===== FOOTER ===== */
+    .foot { border-top: 1px solid var(--line); padding: 36px 0 44px; }
+    .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 14px 40px; }
+    .foot-brand { font-family: var(--display); font-size: 1.6rem; line-height: 1; letter-spacing: .04em; }
+    .foot nav { display: flex; gap: 28px; }
+    .foot nav a { font-family: var(--label); font-size: .6rem; letter-spacing: .34em; text-transform: uppercase; color: var(--ink-2); }
+    .foot nav a:hover { color: var(--ink); }
+    .foot .label { width: 100%; color: var(--muted); letter-spacing: .3em; }
+    .foot .label a { text-transform: none; letter-spacing: .06em; font-family: var(--italic); font-style: italic; font-size: 1rem; }
+
+    /* ===== back to top ===== */
+    .to-top {
+      position: fixed; z-index: 60; right: calc(var(--pad) - 14px); bottom: clamp(18px, 3vw, 40px);
+      display: flex; align-items: center; gap: 14px; writing-mode: vertical-rl;
+      padding: 10px 14px;
+      font-family: var(--label); font-size: .6rem; line-height: 1; letter-spacing: .42em; text-transform: uppercase;
+      color: #fff; mix-blend-mode: difference;
+      opacity: 0; visibility: hidden; transform: translateY(14px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease), visibility 0s linear .6s;
+    }
+    .to-top.is-shown { opacity: 1; visibility: visible; transform: none; transition: opacity .6s var(--ease), transform .6s var(--ease), visibility 0s; }
+    .to-top::before { content: ""; width: 1px; height: 44px; background: currentColor; transition: height .6s var(--ease); }
+    .to-top::after { content: ""; position: absolute; top: 10px; left: 50%; width: 7px; height: 7px; margin-left: -3.5px; border-top: 1px solid currentColor; border-left: 1px solid currentColor; transform: rotate(45deg); }
+    .to-top:hover::before { height: 70px; }
+
+    /* ===== reveals (JS on only) ===== */
+    .js .rv { opacity: 0; transform: translate3d(0, 26px, 0); transition: opacity 1.3s var(--ease) var(--d, 0s), transform 1.3s var(--ease) var(--d, 0s); }
+    .js .rv.is-in { opacity: 1; transform: none; }
+    /* opacity only, for elements that already carry their own transform */
+    .js .rv-fade { opacity: 0; transition: opacity 1.6s var(--ease) var(--d, 0s); }
+    .js .rv-fade.is-in { opacity: 1; }
+    .hero-title span { animation: rise 1.6s var(--ease) both; }
+    .hero-title span + span { animation-delay: .15s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .about-text { grid-column: 1 / span 7; }
+      .about-side { grid-column: 8 / span 5; }
+      .arch-copy { grid-column: 8 / span 5; }
+    }
+    @media (max-width: 820px) {
+      .nav { padding: 20px var(--pad); }
+      .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+      .hero-photo { height: auto; aspect-ratio: 4 / 5; }
+      .hero-copy { grid-column: 1; grid-row: 2; margin: calc(-1 * clamp(60px, 17vw, 120px)) 0 0; padding: 0 var(--pad) 40px; }
+      .hero-title { font-size: clamp(3.4rem, 18vw, 6.4rem); }
+      .hero-tag, .hero-sub { padding-left: 0; }
+      .hero .more { margin-left: 0; }
+
+      .about-text { grid-column: 1 / -1; padding-top: 0; }
+      .about-photo { width: 100%; }
+      .about-side { grid-column: 1 / -1; margin-top: 64px; }
+      .side-photo { width: 70%; }
+
+      .names-list { grid-template-columns: minmax(0, 1fr); max-width: 30em; }
+      .names-list li { padding: 26px 0; }
+      .names-list li + li { border-left: 0; border-top: 1px solid var(--line); }
+
+      .echo-stage { height: auto; padding: 64px var(--pad) 72px; }
+      .echo-w { font-size: clamp(8rem, 38vw, 13rem); }
+      .echo-w.w1 { left: 4%; top: 30px; }
+      .echo-w.w2 { left: auto; right: 4%; top: 300px; }
+      .echo-and { left: 10%; top: 330px; }
+      .echo-fig { position: relative; left: auto; top: auto; transform: none; width: 58%; margin: 90px auto 0; }
+      .echo-copy { position: relative; left: auto; bottom: auto; margin-top: 56px; }
+
+      .arch-title { grid-column: 1 / -1; }
+      .arch-ph.p1 { grid-column: 1 / span 8; }
+      .arch-ph.p2 { grid-column: 6 / span 7; margin-top: clamp(120px, 34vw, 220px); }
+      .arch-copy { grid-column: 1 / -1; grid-row: 3; margin-top: 56px; }
+
+      .card { grid-template-columns: minmax(0, 1fr); }
+      .card-copy { padding: 18px 8px 4px; }
+      .card-photo { grid-row: 1; aspect-ratio: 5 / 4; }
+    }
+    @media (max-width: 520px) {
+      .nav-links { gap: 16px; }
+      .nav-links a { letter-spacing: .26em; }
+      .field b { padding: 0 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+      .js .rv { opacity: 1; transform: none; }
+      .js .rv-fade { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="주 메뉴">
+    <a class="brand" href="#top">SincereLee</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#archive">Gallery</a>
+      <a href="/cv">CV</a>
+      <a href="/en" lang="en" hreflang="en">EN</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <figure class="hero-photo ph"><img src="https://isabel.co.kr/images/hero1.jpg" alt="한옥 툇마루에 선 분홍 치마와 아이보리 저고리 차림의 여성 옆모습" width="1080" height="1616"></figure>
+    <div class="hero-copy">
+      <p class="label hero-kicker">韓服 · Digital Archive</p>
+      <h1 class="hero-title" id="heroName"><span>Sincere</span><span>Lee</span></h1>
+      <p class="hero-tag">允, 진실하게 기록하고 —<br>瑞, 상서로움을 전하다.</p>
+      <p class="hero-sub">한국 복식, 韓服의 디지털 아카이빙을 연구합니다.</p>
+      <a class="more" href="#about">About<svg viewBox="0 0 34 8" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 4h33M29.5 1 33 4l-3.5 3"/></svg></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="about" id="about" aria-labelledby="aboutTitle">
+      <div class="wrap about-grid">
+        <div class="about-text rv">
+          <h2 class="h-small" id="aboutTitle">About</h2>
+          <p class="lead">SincereLee는 편지의 맺음말 <em>‘Sincerely(진심을 담아)’</em>를 떠올리는 이름입니다.</p>
+          <p class="body">sincerely는 ‘순수하고 거짓 없음’을 뜻하는 라틴어 <i>sincerus</i>에서 나와, 1700년대 초부터 편지 끝에서 “이건 진심입니다”라고 서명해온 말이죠.</p>
+          <figure class="about-photo ph"><img src="https://isabel.co.kr/images/hero7.jpg" alt="현판이 걸린 전각 마루에 앉은 옥색·분홍·아이보리 한복 차림의 사람들" width="1600" height="1200" loading="lazy" decoding="async"></figure>
+        </div>
+        <div class="about-side">
+          <figure class="side-photo ph rv" style="--d:.15s"><img src="https://isabel.co.kr/images/hero11.jpg" alt="꽃다발과 갓 모양 모자를 든 한복 차림의 여성" width="1200" height="1200" loading="lazy" decoding="async"></figure>
+          <p class="vword rv-fade" style="--d:.3s" aria-hidden="true"><span>Sincere</span><span>Lee</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="names" aria-label="이름에 담은 뜻">
+      <div class="wrap">
+        <p class="names-q rv">왜 하필 ‘진실’이라는 단어를 골랐냐고요?</p>
+        <ol class="names-list">
+          <li class="rv"><b class="hj">允</b><small>윤</small><span>제 이름 윤서의 ‘윤’이 진실로 윤(允)이니까요.</span></li>
+          <li class="rv" style="--d:.12s"><b>S</b><small>서</small><span>그리고 진실을 가리키는 그 많은 단어 중 굳이 sincere였던 건, 첫 글자 S에 서(seo)를 담을 수 있었기 때문입니다.</span></li>
+          <li class="rv" style="--d:.24s"><b>Lee</b><small>이</small><span>진실하다는 sincere에 성 Lee를 이으면, 소리 내어 읽었을 때 <em>sincerely—진심으로—</em>처럼 들리도록.</span></li>
+        </ol>
+        <p class="names-close rv">그렇게 이름 석 자가 온전히 담길 수 있게 하였습니다.</p>
+      </div>
+    </section>
+
+    <section class="echo" id="sincerely" aria-labelledby="echoTitle">
+      <div class="echo-stage">
+        <span class="echo-w w1" aria-hidden="true">允</span>
+        <figure class="echo-fig ph"><img src="https://isabel.co.kr/images/hero9.jpg" alt="한옥과 나무, 푸른 하늘을 배경으로 선 남색 한복 차림의 뒷모습" width="1200" height="1600" loading="lazy" decoding="async"></figure>
+        <em class="echo-and" aria-hidden="true">and</em>
+        <span class="echo-w w2" aria-hidden="true">瑞</span>
+        <div class="echo-copy rv">
+          <h2 class="h-small" id="echoTitle">Sincerely</h2>
+          <p>允, 진실로. 瑞, 상서롭게. 이름에 새긴 뜻 그대로, 진실하게 기록하고 상서로움을 전하려 합니다.</p>
+          <a class="more" href="#archive">Gallery<svg viewBox="0 0 34 8" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 4h33M29.5 1 33 4l-3.5 3"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="archive" id="archive" aria-labelledby="archTitle">
+      <div class="wrap arch-grid">
+        <h2 class="arch-title rv" id="archTitle"><span>Hanbok</span><span>Archive</span></h2>
+        <figure class="arch-ph p1 ph rv" style="--d:.1s"><img src="https://isabel.co.kr/images/hero4.jpg" alt="단청 기둥 사이 대청마루에 앉아 바깥 전각을 바라보는 한복 차림의 사람들" width="1600" height="1067" loading="lazy" decoding="async"></figure>
+        <figure class="arch-ph p2 ph rv" style="--d:.2s"><img src="https://isabel.co.kr/images/hero2.jpg" alt="하늘색 두루마기와 검은 갓, 남색 저고리와 연보라 치마 차림의 두 사람이 한옥 지붕과 초록 언덕을 바라보는 뒷모습" width="1200" height="1800" loading="lazy" decoding="async"></figure>
+        <div class="arch-copy rv" style="--d:.15s">
+          <p>흩어진 것들을 모아 다음 사람에게 잘 건네는 일이야말로, 좋은 것을 오래 잇는 상서로운 일이라 믿으니까요.</p>
+          <p>갤러리는 지금 한 땀 한 땀 짓는 중이에요.</p>
+          <a class="more" href="/gallery">Gallery<svg viewBox="0 0 34 8" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 4h33M29.5 1 33 4l-3.5 3"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="hello" id="hello" aria-labelledby="helloTitle">
+      <div class="wrap">
+        <div class="card rv">
+          <div class="card-copy">
+            <h2 class="card-title" id="helloTitle">Hello,</h2>
+            <p>안녕하세요, 이윤서입니다. 이렇게 찾아와 주셔서 반갑습니다. 흩어진 한복 자료를 모아 아카이브로 엮는 연구를 하다 보니, 제 이야기도 한곳에 모아두고 싶었습니다. 인생 첫 사이트라 곳곳이 아직 공사중이지만, 기록이란 원래 계속 더해지는 법이니까요. 하나씩 채워갈테니 가끔 들러 달라지는 모습을 지켜봐 주세요.</p>
+            <a class="field" href="mailto:lisabelys@gmail.com"><span>lisabelys@gmail.com</span><b>Mail</b></a>
+            <a class="more" href="/cv">CV · 전체 이력 보기<svg viewBox="0 0 34 8" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 4h33M29.5 1 33 4l-3.5 3"/></svg></a>
+          </div>
+          <figure class="card-photo ph"><img src="https://isabel.co.kr/profile.jpg" alt="이윤서 프로필 사진" width="1200" height="1500" loading="lazy" decoding="async"></figure>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <p class="foot-brand">SincereLee</p>
+      <nav aria-label="바닥 메뉴"><a href="#about">About</a><a href="#archive">Gallery</a><a href="/cv">CV</a><a href="/en" lang="en">English</a></nav>
+      <p class="label">© 2026 Yunseo Isabel Lee · <a href="mailto:lisabelys@gmail.com">lisabelys@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <a class="to-top" id="toTop" href="#top" title="맨 위로">Top</a>
+
+  <script>
+    (function () {
+      'use strict';
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var items = [].slice.call(document.querySelectorAll('.rv, .rv-fade'));
+      if (reduce || !('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('is-in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+        items.forEach(function (el) { io.observe(el); });
+      }
+
+      document.getElementById('heroName').addEventListener('click', function () {
+        alert('여기 누르면 뭐 나오나 궁금하셨죠? Ctrl+D(⌘+D) 💜');
+      });
+
+      var toTop = document.getElementById('toTop'), foot = document.querySelector('.foot'), ticking = false;
+      function onScroll() {
+        ticking = false;
+        var y = window.scrollY || window.pageYOffset;
+        toTop.classList.toggle('is-shown', y > window.innerHeight * .3 && foot.getBoundingClientRect().top > window.innerHeight);
+      }
+      window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>

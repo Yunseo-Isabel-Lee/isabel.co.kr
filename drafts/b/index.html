@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>시안 B · Sage Heritage — SincereLee</title>
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@400;500&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* 시안 B · Sage Heritage — misty full-bleed hero, classic serif caps, sage and forest bands, pill buttons */
+    :root {
+      --sage-50: #e4e7e3;
+      --sage-100: #cbd1cb;
+      --sage-200: #b4bcb3;
+      --ink: #3d463c;
+      --ink-2: #586157;
+      --muted: #7b8479;
+      --forest: #3c4737;
+      --forest-2: #2f382b;
+      --cream: #eef0e9;
+      --line: rgba(61, 70, 60, .18);
+
+      --display: "Marcellus", "Noto Serif KR", Georgia, serif;
+      --kr: "Noto Serif KR", "Apple SD Gothic Neo", serif;
+      --label: "Jost", "Noto Serif KR", sans-serif;
+
+      --pad: clamp(20px, 5vw, 72px);
+      --ease: cubic-bezier(.22, .61, .36, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; overflow-x: hidden;
+      background: var(--sage-100); color: var(--ink);
+      font-family: var(--kr); font-weight: 300; line-height: 1.9;
+      word-break: keep-all; overflow-wrap: break-word;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p, figure { margin: 0; }
+    ::selection { background: var(--forest); color: var(--cream); }
+    :focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
+
+    .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--pad); }
+    .ph { overflow: hidden; background: var(--sage-200); }
+    .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s var(--ease); }
+
+    .sec-title { font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 3.2vw, 2.8rem); line-height: 1.2; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
+    .pill {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 28px;
+      border: 1px solid currentColor; border-radius: 999px;
+      font-family: var(--label); font-weight: 400; font-size: .6rem; letter-spacing: .3em; text-transform: uppercase;
+      transition: background-color .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+    }
+    .pill:hover, .pill:focus-visible { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+    .pill-light:hover, .pill-light:focus-visible { background: var(--cream); border-color: var(--cream); color: var(--forest-2); }
+
+    /* ===== NAV — clear over the hero, forest once you scroll ===== */
+    .nav {
+      position: fixed; inset: 0 0 auto; z-index: 50;
+      display: flex; justify-content: space-between; align-items: center; gap: 24px;
+      padding: 24px var(--pad);
+      color: #fff;
+      transition: background-color .5s var(--ease), padding .5s var(--ease);
+    }
+    .nav.is-solid { padding-top: 14px; padding-bottom: 14px; background: rgba(47, 56, 43, .9); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+    .brand { font-family: var(--display); font-size: 1.15rem; letter-spacing: .1em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: clamp(16px, 2.6vw, 38px); }
+    .nav-links a { position: relative; padding: 4px 0; font-family: var(--label); font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; right: .3em; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .5s var(--ease); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    /* ===== HERO ===== */
+    .hero { position: relative; min-height: 92vh; min-height: 92svh; display: flex; align-items: center; overflow: hidden; color: #fff; background: var(--forest-2); }
+    .hero-bg { position: absolute; inset: 0; background: url('https://isabel.co.kr/images/hero5.jpg') 50% 55% / cover no-repeat; animation: drift 24s ease-in-out infinite alternate; }
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(34, 42, 31, .74) 0%, rgba(34, 42, 31, .52) 38%, rgba(34, 42, 31, .12) 64%, rgba(34, 42, 31, 0) 80%),
+        linear-gradient(180deg, rgba(34, 42, 31, .38) 0%, rgba(34, 42, 31, 0) 22%, rgba(34, 42, 31, 0) 80%, rgba(34, 42, 31, .25) 100%);
+    }
+    .hero-copy { position: relative; z-index: 1; padding-top: 90px; padding-bottom: 60px; }
+    .hero-pre { font-family: var(--display); font-size: clamp(1.15rem, 2vw, 1.7rem); letter-spacing: .08em; text-transform: uppercase; }
+    .hero-title { margin-top: 4px; font-family: var(--display); font-weight: 400; font-size: clamp(3rem, 8.4vw, 7.4rem); line-height: 1; letter-spacing: .02em; text-transform: uppercase; cursor: pointer; }
+    .hero-tag { margin-top: 22px; max-width: 30em; font-size: clamp(.92rem, 1.1vw, 1.02rem); line-height: 1.85; color: #fff; text-shadow: 0 1px 14px rgba(20, 26, 18, .55); }
+    .hero-pre, .hero-title { text-shadow: 0 2px 24px rgba(20, 26, 18, .35); }
+    /* in capitals the name runs together, so LEE steps a hair away from SINCERE */
+    .nm-gap { margin-left: .22em; }
+    .hero .pill { margin-top: 30px; }
+
+    /* ===== NAME — three cards, one per syllable ===== */
+    .names { padding: clamp(90px, 10vw, 140px) 0 clamp(90px, 10vw, 130px); background: var(--sage-100); text-align: center; }
+    .names .lead { margin: 22px auto 0; max-width: 34em; font-size: .96rem; color: var(--ink-2); }
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); margin-top: clamp(48px, 5vw, 70px); }
+    .card .ph { aspect-ratio: 1 / .92; }
+    .card:hover .ph img { transform: scale(1.05); }
+    .card h3 { margin-top: 22px; font-family: var(--display); font-weight: 400; font-size: clamp(1.5rem, 2.2vw, 1.9rem); line-height: 1.2; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); }
+    .card h3 small { display: inline-block; margin-left: .5em; padding: 2px 12px; border: 1px solid var(--line); border-radius: 999px; font-family: var(--kr); font-size: .48em; letter-spacing: .2em; vertical-align: .35em; color: var(--ink-2); }
+    .card p { margin: 12px auto 0; max-width: 21em; font-size: .86rem; line-height: 1.85; color: var(--ink-2); }
+    .names .close { margin-top: clamp(44px, 5vw, 64px); font-size: .92rem; color: var(--ink); }
+
+    /* ===== SPLITS — a full-height photo beside a text column ===== */
+    .split { background: var(--sage-50); }
+    .split-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); max-width: 1200px; margin: 0 auto; padding: 0 var(--pad); }
+    .split-img { min-height: clamp(520px, 64vw, 760px); }
+    .split-copy { align-self: center; padding: clamp(60px, 7vw, 100px) 0 clamp(60px, 7vw, 100px) clamp(36px, 6vw, 90px); }
+    .split-copy p { margin-top: 20px; max-width: 28em; font-size: .92rem; color: var(--ink-2); }
+    .split-copy p:first-of-type { margin-top: 26px; }
+    .split-copy .pill { margin-top: 34px; }
+    .split-copy blockquote { margin: 26px 0 0; padding-left: 18px; border-left: 1px solid var(--ink); max-width: 26em; font-size: 1.02rem; line-height: 1.85; color: var(--ink); }
+
+    /* ===== GALLERY ===== */
+    .gallery { padding: clamp(90px, 10vw, 140px) 0; background: var(--sage-100); text-align: center; }
+    .gallery .lead { margin: 22px auto 0; max-width: 32em; font-size: .96rem; color: var(--ink-2); }
+    .g-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 18px); margin-top: clamp(44px, 5vw, 64px); }
+    .g-row .ph { aspect-ratio: 3 / 4; }
+    .g-row figure:hover img { transform: scale(1.05); }
+    .gallery .pill { margin-top: clamp(40px, 4.6vw, 56px); }
+
+    /* ===== HELLO — forest block ===== */
+    .hello { background: var(--forest); color: var(--cream); }
+    .hello .split-copy { padding-left: 0; padding-right: clamp(36px, 6vw, 90px); }
+    .hello .sec-title { color: var(--cream); }
+    .hello .split-copy p { color: rgba(238, 240, 233, .84); }
+    .hello .split-img img { object-position: 50% 22%; }
+    .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 26px; margin-top: 34px; }
+    .actions .pill { margin-top: 0; }
+    .actions .mail { font-family: var(--label); font-size: .8rem; letter-spacing: .06em; border-bottom: 1px solid rgba(238, 240, 233, .4); transition: border-color .4s; }
+    .actions .mail:hover { border-color: var(--cream); }
+
+    /* ===== FOOTER ===== */
+    .foot { background: var(--forest-2); color: rgba(238, 240, 233, .72); padding: 44px 0 50px; }
+    .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 40px; }
+    .foot-brand { font-family: var(--display); font-size: 1.3rem; letter-spacing: .1em; text-transform: uppercase; color: var(--cream); }
+    .foot nav { display: flex; gap: 26px; }
+    .foot nav a { font-family: var(--label); font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; }
+    .foot nav a:hover { color: var(--cream); }
+    .foot small { width: 100%; font-family: var(--label); font-size: .66rem; letter-spacing: .18em; }
+
+    /* ===== back to top — a small round pill ===== */
+    .to-top {
+      position: fixed; z-index: 60; right: clamp(16px, 2.4vw, 36px); bottom: clamp(16px, 2.4vw, 36px);
+      display: grid; place-items: center; width: 46px; height: 46px;
+      border: 1px solid rgba(61, 70, 60, .5); border-radius: 50%;
+      background: rgba(228, 231, 227, .78); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      color: var(--ink);
+      opacity: 0; visibility: hidden; transform: translateY(12px);
+      transition: opacity .5s var(--ease), transform .5s var(--ease), background-color .4s, visibility 0s linear .5s;
+    }
+    .to-top.is-shown { opacity: 1; visibility: visible; transform: none; transition: opacity .5s var(--ease), transform .5s var(--ease), background-color .4s, visibility 0s; }
+    .to-top:hover { background: var(--cream); }
+    .to-top svg { width: 14px; height: 14px; }
+
+    /* ===== reveals ===== */
+    .js .rv { opacity: 0; transform: translate3d(0, 24px, 0); transition: opacity 1.2s var(--ease) var(--d, 0s), transform 1.2s var(--ease) var(--d, 0s); }
+    .js .rv.is-in { opacity: 1; transform: none; }
+    @keyframes drift { from { transform: scale(1.04) translate3d(-.6%, 0, 0); } to { transform: scale(1.1) translate3d(.6%, -.6%, 0); } }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 860px) {
+      .cards { grid-template-columns: minmax(0, 1fr); max-width: 460px; margin-left: auto; margin-right: auto; gap: 44px; }
+      .split-in { grid-template-columns: minmax(0, 1fr); padding: 0; }
+      .split-img { min-height: 0; aspect-ratio: 4 / 3.4; }
+      .split-copy, .hello .split-copy { padding: 56px var(--pad) 72px; }
+      .hello .split-img { grid-row: 2; aspect-ratio: 4 / 4.4; }
+      .g-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 520px) {
+      .nav { padding: 18px var(--pad); }
+      .nav.is-solid { padding-top: 12px; padding-bottom: 12px; }
+      .brand { font-size: 1rem; letter-spacing: .06em; }
+      .nav-links { gap: 14px; }
+      .nav-links a { letter-spacing: .2em; }
+      .hero { min-height: 86svh; }
+      .hero::after { background: linear-gradient(180deg, rgba(34, 42, 31, .5) 0%, rgba(34, 42, 31, .48) 45%, rgba(34, 42, 31, .38) 70%, rgba(34, 42, 31, .6) 100%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+      .js .rv { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" id="nav" aria-label="주 메뉴">
+    <a class="brand" href="#top">Sincere<span class="nm-gap">Lee</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="/cv">CV</a>
+      <a href="/en" lang="en" hreflang="en">EN</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-bg" role="img" aria-label="잔잔한 호수와 초록 산을 바라보며 난간 앞에 선 분홍 치마 차림의 여성"></div>
+    <div class="wrap hero-copy">
+      <p class="hero-pre">Hanbok · Digital Archive</p>
+      <h1 class="hero-title" id="heroName">Sincere<span class="nm-gap">Lee</span></h1>
+      <p class="hero-tag">允, 진실하게 기록하고 — 瑞, 상서로움을 전하다.<br>한국 복식, 韓服의 디지털 아카이빙을 연구합니다.</p>
+      <a class="pill pill-light" href="#about">About</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="names" id="about" aria-labelledby="aboutTitle">
+      <div class="wrap">
+        <h2 class="sec-title rv" id="aboutTitle">Sincere + Lee</h2>
+        <p class="lead rv" style="--d:.1s">SincereLee는 편지의 맺음말 ‘Sincerely(진심을 담아)’를 떠올리는 이름입니다. 왜 하필 ‘진실’이라는 단어를 골랐냐고요?</p>
+        <div class="cards">
+          <article class="card rv">
+            <figure class="ph"><img src="https://isabel.co.kr/images/hero9.jpg" alt="한옥과 나무, 푸른 하늘을 배경으로 선 남색 한복 차림의 뒷모습" width="1200" height="1600" loading="lazy" decoding="async"></figure>
+            <h3>允<small>윤</small></h3>
+            <p>제 이름 윤서의 ‘윤’이 진실로 윤(允)이니까요.</p>
+          </article>
+          <article class="card rv" style="--d:.12s">
+            <figure class="ph"><img src="https://isabel.co.kr/images/hero3.jpg" alt="붉은 기둥과 단청 처마 아래 정자에서 초록 풍경을 바라보는 코발트·남색 한복 차림의 두 사람 뒷모습" width="1200" height="1800" loading="lazy" decoding="async"></figure>
+            <h3>S<small>서</small></h3>
+            <p>그리고 진실을 가리키는 그 많은 단어 중 굳이 sincere였던 건, 첫 글자 S에 서(seo)를 담을 수 있었기 때문입니다.</p>
+          </article>
+          <article class="card rv" style="--d:.24s">
+            <figure class="ph"><img src="https://isabel.co.kr/images/hero2.jpg" alt="하늘색 두루마기와 검은 갓, 남색 저고리와 연보라 치마 차림의 두 사람이 한옥 지붕과 초록 언덕을 바라보는 뒷모습" width="1200" height="1800" loading="lazy" decoding="async"></figure>
+            <h3>Lee<small>이</small></h3>
+            <p>진실하다는 sincere에 성 Lee를 이으면, 소리 내어 읽었을 때 sincerely—진심으로—처럼 들리도록.</p>
+          </article>
+        </div>
+        <p class="close rv">그렇게 이름 석 자가 온전히 담길 수 있게 하였습니다.</p>
+      </div>
+    </section>
+
+    <section class="split" id="sincerely" aria-labelledby="sincTitle">
+      <div class="split-in">
+        <figure class="split-img ph"><img src="https://isabel.co.kr/images/hero8.jpg" alt="초록 숲 사이 돌계단을 올라 문으로 향하는 한복 차림의 사람들" width="1200" height="1800" loading="lazy" decoding="async"></figure>
+        <div class="split-copy rv">
+          <h2 class="sec-title" id="sincTitle">Sincerely</h2>
+          <p>sincerely는 ‘순수하고 거짓 없음’을 뜻하는 라틴어 sincerus에서 나와, 1700년대 초부터 편지 끝에서 “이건 진심입니다”라고 서명해온 말이죠.</p>
+          <p>允, 진실로. 瑞, 상서롭게. 이름에 새긴 뜻 그대로, 진실하게 기록하고 상서로움을 전하려 합니다.</p>
+          <a class="pill" href="#gallery">Gallery</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery" aria-labelledby="galTitle">
+      <div class="wrap">
+        <h2 class="sec-title rv" id="galTitle">Hanbok Gallery</h2>
+        <p class="lead rv" style="--d:.1s">흩어진 것들을 모아 다음 사람에게 잘 건네는 일이야말로, 좋은 것을 오래 잇는 상서로운 일이라 믿으니까요.</p>
+        <div class="g-row">
+          <figure class="ph rv"><img src="https://isabel.co.kr/images/hero6.jpg" style="object-position:58% 50%" alt="한옥 마을 길에 선 갓과 두루마기, 한복 차림의 네 사람 뒷모습" width="1600" height="1067" loading="lazy" decoding="async"></figure>
+          <figure class="ph rv" style="--d:.08s"><img src="https://isabel.co.kr/images/hero10.jpg" style="object-position:40% 50%" alt="전각 앞마당에 선 한복 차림의 사람들" width="1600" height="1067" loading="lazy" decoding="async"></figure>
+          <figure class="ph rv" style="--d:.16s"><img src="https://isabel.co.kr/images/hero4.jpg" style="object-position:62% 50%" alt="단청 기둥 사이 대청마루에 앉아 바깥 전각을 바라보는 한복 차림의 사람들" width="1600" height="1067" loading="lazy" decoding="async"></figure>
+          <figure class="ph rv" style="--d:.24s"><img src="https://isabel.co.kr/images/hero7.jpg" style="object-position:50% 50%" alt="현판이 걸린 전각 마루에 앉은 옥색·분홍·아이보리 한복 차림의 사람들" width="1600" height="1200" loading="lazy" decoding="async"></figure>
+        </div>
+        <a class="pill" href="/gallery">갤러리 · 공사중</a>
+      </div>
+    </section>
+
+    <section class="hello" id="hello" aria-labelledby="helloTitle">
+      <div class="split-in">
+        <div class="split-copy rv">
+          <h2 class="sec-title" id="helloTitle">Hello,</h2>
+          <p>안녕하세요, 이윤서입니다. 이렇게 찾아와 주셔서 반갑습니다. 흩어진 한복 자료를 모아 아카이브로 엮는 연구를 하다 보니, 제 이야기도 한곳에 모아두고 싶었습니다. 인생 첫 사이트라 곳곳이 아직 공사중이지만, 기록이란 원래 계속 더해지는 법이니까요. 하나씩 채워갈테니 가끔 들러 달라지는 모습을 지켜봐 주세요.</p>
+          <div class="actions">
+            <a class="pill pill-light" href="/cv">CV 보기</a>
+            <a class="mail" href="mailto:lisabelys@gmail.com">lisabelys@gmail.com</a>
+          </div>
+        </div>
+        <figure class="split-img ph"><img src="https://isabel.co.kr/profile.jpg" alt="이윤서 프로필 사진" width="1200" height="1500" loading="lazy" decoding="async"></figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <p class="foot-brand">Sincere<span class="nm-gap">Lee</span></p>
+      <nav aria-label="바닥 메뉴"><a href="#about">About</a><a href="#gallery">Gallery</a><a href="/cv">CV</a><a href="/en" lang="en">English</a></nav>
+      <small>© 2026 Yunseo Isabel Lee · lisabelys@gmail.com</small>
+    </div>
+  </footer>
+
+  <a class="to-top" id="toTop" href="#top" title="맨 위로" aria-label="맨 위로"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M7 13V1.5M2 6.5 7 1.5l5 5"/></svg></a>
+
+  <script>
+    (function () {
+      'use strict';
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var items = [].slice.call(document.querySelectorAll('.rv'));
+      if (reduce || !('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('is-in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+        items.forEach(function (el) { io.observe(el); });
+      }
+
+      document.getElementById('heroName').addEventListener('click', function () {
+        alert('여기 누르면 뭐 나오나 궁금하셨죠? Ctrl+D(⌘+D) 💜');
+      });
+
+      var nav = document.getElementById('nav'), hero = document.getElementById('top');
+      var toTop = document.getElementById('toTop'), foot = document.querySelector('.foot'), ticking = false;
+      function onScroll() {
+        ticking = false;
+        var y = window.scrollY || window.pageYOffset;
+        nav.classList.toggle('is-solid', y > hero.offsetHeight - nav.offsetHeight);
+        toTop.classList.toggle('is-shown', y > window.innerHeight * .3 && foot.getBoundingClientRect().top > window.innerHeight);
+      }
+      window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>

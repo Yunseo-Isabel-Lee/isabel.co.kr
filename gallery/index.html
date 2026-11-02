@@ -21,7 +21,10 @@
   <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@400;500&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@400;500&family=Noto+Serif+KR:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="/assets/site-header.css">
+  <script src="/assets/site-header.js" defer></script>
   <style>
     /* Gallery (under construction) — same Moonlit Bojagi system as the home page */
     :root {
@@ -93,73 +96,6 @@
       pointer-events: none;
       background: repeating-linear-gradient(90deg, rgba(198, 198, 232, .075) 0 1px, transparent 1px 25%);
     }
-
-    /* ===== NAV ===== */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 60;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 28px var(--gutter);
-      color: var(--cream);
-      border-bottom: 1px solid transparent;
-      transition: padding .6s var(--ease), background-color .6s var(--ease), border-color .6s var(--ease);
-    }
-    .nav.is-scrolled {
-      padding-top: 15px;
-      padding-bottom: 15px;
-      background-color: rgba(11, 20, 36, .8);
-      -webkit-backdrop-filter: blur(16px) saturate(1.15);
-      backdrop-filter: blur(16px) saturate(1.15);
-      border-bottom-color: var(--hair);
-    }
-    .nav a { text-decoration: none; }
-    .brand {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: 1.4rem;
-      line-height: 1;
-      letter-spacing: .02em;
-      transition: opacity .4s;
-    }
-    .brand i { font-weight: 300; color: var(--blush); }
-    .brand:hover { opacity: .75; }
-    .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 48px); }
-    .nav-links a {
-      position: relative;
-      padding: 6px 0;
-      font-family: var(--sans);
-      font-size: .68rem;
-      letter-spacing: .38em;
-      text-transform: uppercase;
-    }
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0; right: .38em; bottom: 0;
-      height: 1px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform .6s var(--ease);
-    }
-    .nav-links a:hover::after,
-    .nav-links a:focus-visible::after,
-    .nav-links a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
-    .side-lang {
-      position: fixed; z-index: 70; right: clamp(14px, 1.8vw, 28px); top: 50%; transform: translateY(-50%);
-      display: flex; align-items: center; gap: 14px; writing-mode: vertical-rl;
-      padding: 8px 0;
-      font-family: var(--sans); font-size: .6rem; line-height: 1; letter-spacing: .42em; text-transform: uppercase; text-decoration: none;
-      color: #fff; mix-blend-mode: difference;
-      animation: fade 1.6s 1.2s var(--ease) both;
-    }
-    .side-lang::before { content: ""; width: 1px; height: 44px; background: currentColor; opacity: .7; transition: height .6s var(--ease); }
-    .side-lang:hover::before, .side-lang:focus-visible::before { height: 72px; }
-    .side-lang:lang(ko) { font-family: var(--kr); font-size: .72rem; letter-spacing: .3em; }
 
     /* ===== UNDER CONSTRUCTION ===== */
     .wip {
@@ -386,12 +322,6 @@
     }
 
     @media (max-width: 720px) {
-      .nav { padding: 20px var(--gutter); }
-      .nav.is-scrolled { padding-top: 13px; padding-bottom: 13px; }
-      .brand { font-size: 1.25rem; }
-      .nav-links { gap: 18px; }
-      .nav-links a { font-size: .62rem; letter-spacing: .32em; }
-
       .wip { padding-top: 120px; }
       .wip-head { flex-direction: column; align-items: flex-start; }
       .wip-photo { grid-column: 1 / span 11; }
@@ -419,16 +349,22 @@
   </style>
 </head>
 <body>
-  <nav class="nav" id="nav" aria-label="주 메뉴">
-    <a class="brand" href="/">Sincere<i>Lee</i></a>
+  <nav class="nav is-scrolled" id="nav" aria-label="주 메뉴">
+    <a class="brand" href="/">SincereLee</a>
     <div class="nav-links">
       <a href="/#about">About</a>
       <a href="/gallery" aria-current="page">Gallery</a>
       <a href="/cv">CV</a>
+      <div class="lang" id="lang">
+        <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="언어 선택" title="언어 선택"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width=".9" aria-hidden="true"><circle cx="10" cy="10" r="8.4"/><ellipse cx="10" cy="10" rx="3.6" ry="8.4"/><path d="M1.6 10h16.8"/></svg></button>
+        <ul class="lang-menu" id="langMenu">
+          <li><a href="/gallery" lang="ko" hreflang="ko" aria-current="page">한국어<span class="dot" aria-hidden="true"></span></a></li>
+          <li><a href="/en/gallery" lang="en" hreflang="en">English</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <a class="side-lang" href="/en/gallery" lang="en" hreflang="en">English</a>
 
   <main id="top">
     <section class="wip" aria-labelledby="galleryTitle">
@@ -527,17 +463,6 @@
         });
       }
 
-      /* nav: glass backdrop once scrolled */
-      var nav = document.getElementById('nav');
-      var ticking = false;
-      function onScroll() {
-        ticking = false;
-        nav.classList.toggle('is-scrolled', (window.scrollY || window.pageYOffset) > 8);
-      }
-      window.addEventListener('scroll', function () {
-        if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
-      }, { passive: true });
-      onScroll();
     })();
   </script>
 </body>

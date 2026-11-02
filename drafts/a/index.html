@@ -78,10 +78,10 @@
       -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1);
       border-bottom-color: var(--line);
     }
-    .brand { font-family: var(--display); font-size: 1.3rem; line-height: 1; letter-spacing: .06em; opacity: 0; pointer-events: none; transition: opacity .5s var(--ease); }
+    .brand { font-family: var(--display); font-size: 1.5rem; line-height: 1; letter-spacing: .06em; opacity: 0; pointer-events: none; transition: opacity .5s var(--ease); }
     .nav.is-scrolled .brand { opacity: 1; pointer-events: auto; }
     .nav-links { display: flex; gap: clamp(18px, 3vw, 44px); }
-    .nav-links a { position: relative; padding: 4px 0; font-family: var(--label); font-size: .6rem; letter-spacing: .38em; text-transform: uppercase; }
+    .nav-links a { position: relative; padding: 6px 0; font-family: var(--label); font-size: .68rem; letter-spacing: .38em; text-transform: uppercase; }
     .nav-links a::after { content: ""; position: absolute; left: 0; right: .38em; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .6s var(--ease); }
     .nav-links a:hover::after, .nav-links a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
 
@@ -149,9 +149,9 @@
       background: linear-gradient(118deg, #d4c3ae 0%, #e7dccf 26%, #f5f0ea 52%, #ffffff 78%);
     }
     .echo-stage { position: relative; max-width: 1320px; height: clamp(620px, 92vh, 940px); margin: 0 auto; }
-    .echo-w { position: absolute; z-index: 3; font-family: var(--hanja); font-weight: 200; font-size: clamp(10rem, 25vw, 23rem); line-height: 1; color: #fff; mix-blend-mode: difference; }
-    .echo-w.w1 { left: 20%; top: 2%; }
-    .echo-w.w2 { left: 55%; top: 34%; }
+    .echo-w { position: absolute; z-index: 3; font-family: var(--hanja); font-weight: 200; font-size: clamp(8rem, 20vw, 18.5rem); line-height: 1; color: #fff; mix-blend-mode: difference; }
+    .echo-w.w1 { left: 24%; top: 4%; }
+    .echo-w.w2 { left: 56%; top: 40%; }
     .echo-and { position: absolute; left: 28%; top: 56%; font-family: var(--italic); font-style: italic; font-weight: 300; font-size: clamp(1.6rem, 2.6vw, 2.4rem); color: var(--ink-2); }
     /* the veranda photo, cropped in so she fills more of the frame; both characters run over it, inverting where they cross */
     .echo-fig { position: absolute; z-index: 2; left: 50%; top: 9%; width: clamp(250px, 27vw, 390px); aspect-ratio: 2 / 3; transform: translateX(-50%); box-shadow: 0 40px 80px -40px rgba(60, 40, 20, .45); }
@@ -271,8 +271,8 @@
       .names-list li + li { border-left: 0; border-top: 1px solid var(--line); }
 
       .echo-stage { height: auto; padding: 64px var(--pad) 72px; }
-      .echo-w { font-size: clamp(8rem, 38vw, 13rem); }
-      .echo-w.w1 { left: 4%; top: 30px; }
+      .echo-w { font-size: clamp(6.5rem, 31vw, 10.5rem); }
+      .echo-w.w1 { left: 4%; top: 70px; }
       .echo-w.w2 { left: auto; right: 4%; top: 300px; }
       .echo-and { left: 10%; top: 330px; }
       .echo-fig { position: relative; left: auto; top: auto; transform: none; width: 60%; margin: 90px auto 0; }
@@ -289,8 +289,8 @@
     }
     @media (max-width: 520px) {
       .nav-links { gap: 16px; }
-      .nav-links a { letter-spacing: .26em; }
-      .brand { font-size: 1.1rem; }
+      .nav-links a { font-size: .62rem; letter-spacing: .26em; }
+      .brand { font-size: 1.2rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {

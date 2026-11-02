@@ -79,7 +79,7 @@
     .more svg { width: 34px; height: 8px; transition: transform .6s var(--ease); }
     .more:hover svg, .more:focus-visible svg { transform: translateX(6px); }
 
-    /* ===== NAV — clear at the very top, frosted paper the moment the page moves ===== */
+    /* ===== NAV — clear over the hero photos, frosted paper once they have scrolled past ===== */
     .nav {
       position: fixed; inset: 0 0 auto; z-index: 50;
       display: flex; justify-content: space-between; align-items: center; gap: 24px;
@@ -174,7 +174,6 @@
     .echo-fig img { transform: scale(1.38); transform-origin: 58% 74%; }
     .echo-copy { position: absolute; left: var(--pad); bottom: 9%; max-width: 21em; }
     .echo-copy p { margin-top: 14px; font-size: .9rem; color: var(--ink-2); }
-    .echo-copy .more { margin-top: 26px; }
 
     /* ===== ARCHIVE — the title sits on top of two staggered photos, inverting where it crosses them ===== */
     .archive { padding: clamp(120px, 13vw, 200px) 0 clamp(100px, 11vw, 170px); }
@@ -381,7 +380,6 @@
         <div class="echo-copy rv">
           <h2 class="h-small" id="echoTitle">Sincerely</h2>
           <p>允, with sincerity. 瑞, with grace. True to what my name carries, I hope to record with honesty and pass on the auspicious.</p>
-          <a class="more" href="#archive">Gallery<svg viewBox="0 0 34 8" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 4h33M29.5 1 33 4l-3.5 3"/></svg></a>
         </div>
       </div>
     </section>
@@ -393,7 +391,6 @@
         <figure class="arch-ph p2 ph rv" style="--d:.2s"><img src="https://isabel.co.kr/images/hero2.jpg" alt="Two people seen from behind, one in a sky-blue durumagi and black gat, the other in a navy jeogori and lilac chima, looking toward hanok roofs and green hills" width="1200" height="1800" loading="lazy" decoding="async"></figure>
         <div class="arch-copy rv" style="--d:.15s">
           <p>For gathering what has been scattered and handing it on to the next person is, I believe, how good things are kept and carried forward.</p>
-          <p>The gallery is still being sewn, stitch by stitch.</p>
           <a class="more" href="/en/gallery">Gallery<svg viewBox="0 0 34 8" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 4h33M29.5 1 33 4l-3.5 3"/></svg></a>
         </div>
       </div>
@@ -448,12 +445,12 @@
         alert('Bet you\'re wondering what this does. Ctrl+D (⌘+D) 💜');
       });
 
-      /* header frosts as soon as the page moves; back-to-top after a short scroll, out of the way at the footer */
-      var nav = document.getElementById('nav'), toTop = document.getElementById('toTop'), foot = document.querySelector('.foot'), ticking = false;
+      /* header stays clear over the hero photos and frosts once they have scrolled past; back-to-top after a short scroll, out of the way at the footer */
+      var nav = document.getElementById('nav'), heroPhoto = document.getElementById('slides'), toTop = document.getElementById('toTop'), foot = document.querySelector('.foot'), ticking = false;
       function onScroll() {
         ticking = false;
         var y = window.scrollY || window.pageYOffset;
-        nav.classList.toggle('is-scrolled', y > 24);
+        nav.classList.toggle('is-scrolled', heroPhoto.getBoundingClientRect().bottom < nav.offsetHeight);
         toTop.classList.toggle('is-shown', y > window.innerHeight * .3 && foot.getBoundingClientRect().top > window.innerHeight);
       }
       window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });

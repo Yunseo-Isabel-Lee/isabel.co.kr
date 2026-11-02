@@ -6,7 +6,7 @@
   <title>Yunseo Isabel Lee — CV</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Mrs+Saint+Delafield&family=Noto+Sans+KR:wght@300..700&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Jost:wght@400;500&family=Montserrat:wght@500;600&family=Mrs+Saint+Delafield&family=Noto+Sans+KR:wght@300..700&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="/assets/lang-menu.css?v=2">
   <script src="/assets/site-header.js?v=2" defer></script>
@@ -53,7 +53,7 @@
     }
     a { color: inherit; text-decoration: none; }
 
-    /* nav — the CV's own lavender bar */
+    /* nav — the CV's own lavender bar (no rule beneath), set in the home header's type: Italiana name, Jost menu */
     .nav {
       position: fixed; inset: 0 0 auto 0; z-index: 20;
       display: flex; justify-content: space-between; align-items: center;
@@ -64,13 +64,17 @@
       /* language menu colours (assets/lang-menu.css) */
       --lm-ink: var(--deep); --lm-bg: rgba(249, 248, 250, .97); --lm-line: rgba(62, 53, 78, .12); --lm-hover: var(--band); --lm-shadow: rgba(46, 38, 62, .3);
     }
-    .nav-brand { font-family: "Playfair Display", serif; font-size: 1.05rem; letter-spacing: 0.04em; }
-    .nav-links { display: flex; align-items: center; gap: 30px; }
+    .nav-brand { font-family: "Italiana", "Playfair Display", serif; font-weight: 400; font-size: 1.5rem; line-height: 1; letter-spacing: .06em; }
+    .nav-links { display: flex; align-items: center; gap: clamp(18px, 3vw, 44px); }
     .nav-links a {
-      font-family: var(--label); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase;
-      padding-bottom: 3px; border-bottom: 1px solid transparent; transition: border-color .2s ease, color .2s ease;
+      position: relative; padding: 6px 0;
+      font-family: "Jost", var(--label); font-weight: 400; font-size: .68rem; line-height: 1.85; letter-spacing: .38em; text-transform: uppercase;
     }
-    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--ink); border-bottom-color: currentColor; }
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; right: .38em; bottom: 0; height: 1px; background: currentColor;
+      transform: scaleX(0); transform-origin: right; transition: transform .6s cubic-bezier(.22, .61, .36, 1);
+    }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after, .nav-links a[aria-current="page"]::after { transform: scaleX(1); transform-origin: left; }
 
     /* sheet */
     .sheet {
@@ -221,8 +225,9 @@
     }
     @media (max-width: 560px) {
       .nav { padding: 18px 20px; }
-      .nav-links { gap: 14px; }
-      .nav-links a { font-size: 0.66rem; letter-spacing: 0.16em; }
+      .nav-brand { font-size: 1.2rem; }
+      .nav-links { gap: 16px; }
+      .nav-links a { font-size: .62rem; letter-spacing: .26em; }
       .en { letter-spacing: 0.26em; }
       .band { font-size: 0.9rem; letter-spacing: 0.02em; }
       .entry .meta i { margin: 0 6px; }

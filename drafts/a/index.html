@@ -8,24 +8,32 @@
   <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Jost:wght@400;500&family=Noto+Serif+KR:wght@200;300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@400;500&family=Noto+Serif+KR:wght@200;300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
-    /* 시안 A · Editorial — white page, warm sand light, hairline display caps that overlap the photographs */
+    /* 시안 A · Editorial, misty blue — hairline display caps straddling the photographs, a navy letter at the end.
+       palette: #0A1931 · #495977 #687CA2 #9EAFD2 #CAD4EF · #F6FAFD · blush #F7E5EB, picked to sit with blue durumagi and pink/lilac chima */
     :root {
-      --paper: #ffffff;
-      --sand: #ebe2d7;
-      --sand-2: #dccdbb;
-      --ink: #161412;
-      --ink-2: #4f4942;
-      --muted: #8a8279;
-      --line: rgba(22, 20, 18, .14);
+      --paper: #f6fafd;
+      --ice: #e6ebf7;
+      --mist: #cad4ef;
+      --haze: #9eafd2;
+      --slate: #687ca2;
+      --steel: #495977;
+      --navy: #1a3d63;
+      --night: #0a1931;
+      --blush: #f7e5eb;
+
+      --ink: var(--night);
+      --ink-2: var(--steel);
+      --muted: var(--slate);
+      --line: rgba(10, 25, 49, .12);
 
       --display: "Italiana", "Cormorant Garamond", Georgia, serif;
-      --italic: "Cormorant Garamond", Georgia, serif;
+      --serif: "Cormorant Garamond", "Noto Serif KR", Georgia, serif;
       --label: "Jost", "Pretendard Variable", Pretendard, sans-serif;
       --kr: "Pretendard Variable", Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
-      --hanja: "Noto Serif KR", serif;
+      --kr-serif: "Noto Serif KR", "Apple SD Gothic Neo", serif;
 
       --pad: clamp(20px, 5vw, 80px);
       --gap: clamp(14px, 1.8vw, 28px);
@@ -44,16 +52,15 @@
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
     h1, h2, h3, p, figure, ol { margin: 0; }
-    ::selection { background: var(--sand-2); color: var(--ink); }
-    :focus-visible { outline: 1px solid var(--ink); outline-offset: 4px; }
+    ::selection { background: var(--mist); color: var(--night); }
+    :focus-visible { outline: 1px solid currentColor; outline-offset: 4px; }
 
     .wrap { width: 100%; max-width: 1320px; margin: 0 auto; padding: 0 var(--pad); }
     .label { font-family: var(--label); font-weight: 400; font-size: .62rem; line-height: 1.6; letter-spacing: .42em; text-transform: uppercase; }
     .h-small { font-family: var(--label); font-weight: 500; font-size: .74rem; letter-spacing: .26em; text-transform: uppercase; color: var(--ink); }
-    .ph { overflow: hidden; background: var(--sand); }
-    .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .ph { position: relative; overflow: hidden; background: var(--mist); }
+    .ph img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.88); }
 
-    /* "GET STARTED ——→" link */
     .more {
       display: inline-flex; align-items: center; gap: 14px;
       padding: 6px 0;
@@ -63,48 +70,64 @@
     .more svg { width: 34px; height: 8px; transition: transform .6s var(--ease); }
     .more:hover svg, .more:focus-visible svg { transform: translateX(6px); }
 
-    /* ===== NAV — inverts against whatever is under it ===== */
+    /* ===== NAV — clear at the very top, frosted paper the moment the page moves ===== */
     .nav {
       position: fixed; inset: 0 0 auto; z-index: 50;
       display: flex; justify-content: space-between; align-items: center; gap: 24px;
       padding: 26px var(--pad);
-      color: #fff; mix-blend-mode: difference;
-      pointer-events: none;
+      color: var(--ink);
+      border-bottom: 1px solid transparent;
+      transition: padding .5s var(--ease), background-color .5s var(--ease), border-color .5s var(--ease), color .5s var(--ease);
     }
-    .nav a { pointer-events: auto; }
-    .brand { font-family: var(--display); font-size: 1.3rem; line-height: 1; letter-spacing: .06em; }
+    .nav.is-scrolled {
+      padding-top: 14px; padding-bottom: 14px;
+      background: rgba(246, 250, 253, .9);
+      -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1);
+      border-bottom-color: var(--line);
+    }
+    .brand { font-family: var(--display); font-size: 1.3rem; line-height: 1; letter-spacing: .06em; opacity: 0; pointer-events: none; transition: opacity .5s var(--ease); }
+    .nav.is-scrolled .brand { opacity: 1; pointer-events: auto; }
     .nav-links { display: flex; gap: clamp(18px, 3vw, 44px); }
-    .nav-links a { font-family: var(--label); font-size: .6rem; letter-spacing: .38em; text-transform: uppercase; }
+    .nav-links a { position: relative; padding: 4px 0; font-family: var(--label); font-size: .6rem; letter-spacing: .38em; text-transform: uppercase; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; right: .38em; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: right; transition: transform .6s var(--ease); }
+    .nav-links a:hover::after, .nav-links a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
 
-    /* ===== HERO — photo to the left, the name straddling its edge ===== */
+    /* ===== HERO — a few blue-and-lilac photographs crossfading on the left, the name in navy on the paper beside them ===== */
     .hero { position: relative; display: grid; grid-template-columns: 58% minmax(0, 1fr); min-height: 100vh; min-height: 100svh; background: var(--paper); }
     .hero-photo { grid-column: 1; grid-row: 1; height: 100vh; height: 100svh; }
-    .hero-photo img { object-position: 50% 30%; }
-    .hero-copy { grid-column: 2; grid-row: 1; align-self: center; margin-left: calc(-1 * clamp(70px, 10vw, 170px)); padding: 120px var(--pad) 80px 0; }
-    .hero-kicker { margin: 0 0 22px .3em; color: #fff; mix-blend-mode: difference; }
+    .slide {
+      position: absolute; inset: 0;
+      background: var(--mist) var(--pos, 50% 50%) / cover no-repeat;
+      opacity: 0; transform: scale(1.06);
+      transition: opacity 1.8s var(--ease), transform 9s linear;
+    }
+    .slide.is-active { opacity: 1; transform: scale(1); }
+    .hero-copy { grid-column: 2; grid-row: 1; align-self: center; min-width: 0; padding: 120px var(--pad) 80px clamp(32px, 4.4vw, 72px); }
+    .hero-kicker { margin: 0 0 22px .3em; color: var(--slate); }
     .hero-title {
       font-family: var(--display); font-weight: 400;
-      font-size: clamp(4.2rem, 10.5vw, 11rem); line-height: .84; letter-spacing: .02em; text-transform: uppercase;
-      color: #fff; mix-blend-mode: difference; cursor: pointer;
+      font-size: clamp(3.6rem, 7.6vw, 8.4rem); line-height: .86; letter-spacing: .02em; text-transform: uppercase;
+      color: var(--night); cursor: pointer;
     }
-    .hero-title span { display: block; }
-    .hero-title span + span { padding-left: 1.1em; }
-    .hero-tag { margin-top: clamp(34px, 4vw, 56px); padding-left: clamp(70px, 10vw, 170px); font-size: clamp(.95rem, 1.1vw, 1.05rem); line-height: 1.9; color: var(--ink); }
-    .hero-sub { margin-top: 8px; padding-left: clamp(70px, 10vw, 170px); font-size: .86rem; color: var(--muted); }
-    .hero .more { margin: clamp(30px, 3.6vw, 48px) 0 0 clamp(70px, 10vw, 170px); }
+    .hero-title span { display: block; animation: rise 1.6s var(--ease) both; }
+    .hero-title span + span { padding-left: 1.1em; color: var(--slate); animation-delay: .15s; }
+    .hero-tag { margin-top: clamp(34px, 4vw, 56px); font-size: clamp(.95rem, 1.1vw, 1.05rem); line-height: 1.9; color: var(--ink); }
+    .hero-sub { margin-top: 8px; font-size: .86rem; color: var(--muted); }
+    .hero .more { margin-top: clamp(30px, 3.6vw, 48px); }
 
-    /* ===== ABOUT — text and a landscape on the left, the stacked name and a portrait on the right ===== */
+    /* ===== ABOUT ===== */
     .about { padding: clamp(110px, 12vw, 190px) 0 clamp(90px, 10vw, 150px); }
     .about-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); align-items: start; }
     .about-text { grid-column: 1 / span 6; padding-top: clamp(60px, 9vw, 150px); }
     .about-text .lead { margin-top: 18px; max-width: 30em; font-size: clamp(1.05rem, 1.3vw, 1.2rem); line-height: 1.8; font-weight: 400; color: var(--ink); }
-    .about-text .lead em { font-style: normal; border-bottom: 1px solid var(--sand-2); }
+    .about-text .lead em { font-style: normal; border-bottom: 1px solid var(--haze); }
     .about-text .body { margin-top: 14px; max-width: 32em; font-size: .9rem; color: var(--ink-2); }
-    .about-text .body i { font-family: var(--italic); font-size: 1.1em; }
+    .about-text .body i { font-family: var(--serif); font-size: 1.1em; }
     .about-photo { margin-top: clamp(40px, 5vw, 64px); width: 92%; aspect-ratio: 4 / 3; }
+    .about-photo img { object-position: 55% 50%; }
     .about-side { grid-column: 8 / span 5; position: relative; }
     .side-photo { width: 64%; margin-left: auto; aspect-ratio: 4 / 5; }
-    .side-photo img { object-position: 45% 40%; }
+    .side-photo img { object-position: 50% 30%; }
     .vword {
       position: absolute; left: 0; bottom: -5%;
       writing-mode: vertical-rl; transform: rotate(180deg);
@@ -113,7 +136,7 @@
     }
     /* each word is its own column; after the half-turn they read bottom-up, SINCERE first, LEE set a little higher */
     .vword span { display: block; }
-    .vword span:last-child { padding-top: 2.4em; }
+    .vword span:last-child { padding-top: 2.4em; color: var(--slate); }
 
     /* ===== NAMES — the three syllables, side by side ===== */
     .names { padding: 0 0 clamp(110px, 12vw, 180px); text-align: center; }
@@ -122,76 +145,103 @@
     .names-list li { padding: 8px clamp(18px, 3vw, 44px); }
     .names-list li + li { border-left: 1px solid var(--line); }
     .names-list b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(3rem, 5vw, 4.6rem); line-height: 1; text-transform: uppercase; color: var(--ink); }
-    .names-list b.hj { font-family: var(--hanja); font-weight: 200; }
-    .names-list small { display: block; margin-top: 12px; font-size: .74rem; letter-spacing: .4em; color: var(--muted); }
+    .names-list b.hj { font-family: var(--kr-serif); font-weight: 200; }
+    .names-list small { display: block; margin-top: 12px; font-size: .74rem; letter-spacing: .4em; color: var(--slate); }
     .names-list span { display: block; margin-top: 18px; font-size: .88rem; line-height: 1.85; color: var(--ink-2); }
     .names-list em { font-style: normal; color: var(--ink); }
     .names-close { margin-top: clamp(40px, 5vw, 60px); font-size: .92rem; color: var(--ink); }
 
-    /* ===== 允 & 瑞 — sand light, the characters around a portrait ===== */
+    /* ===== 允 & 瑞 — misty blue light; the portrait is toned to the palette and fades into it ===== */
     .echo {
       position: relative; overflow: hidden;
-      background: linear-gradient(118deg, #d4c3ae 0%, #e7dccf 26%, #f5f0ea 52%, #ffffff 78%);
+      background: linear-gradient(118deg, #b4c0de 0%, #cad4ef 24%, #e4e9f6 52%, #f6fafd 80%);
     }
     .echo-stage { position: relative; max-width: 1320px; height: clamp(620px, 92vh, 940px); margin: 0 auto; }
-    .echo-w { position: absolute; font-family: var(--hanja); font-weight: 200; font-size: clamp(10rem, 25vw, 23rem); line-height: 1; }
-    .echo-w.w1 { left: 20%; top: 2%; color: var(--ink); }
-    .echo-w.w2 { left: 55%; top: 34%; color: #fff; mix-blend-mode: difference; }
-    .echo-and { position: absolute; left: 28%; top: 56%; font-family: var(--italic); font-style: italic; font-weight: 300; font-size: clamp(1.6rem, 2.6vw, 2.4rem); color: var(--ink-2); }
-    .echo-fig { position: absolute; left: 50%; top: 9%; width: clamp(230px, 25vw, 360px); aspect-ratio: 2 / 3; transform: translateX(-50%); box-shadow: 0 40px 80px -40px rgba(60, 40, 20, .45); }
-    .echo-fig img { object-position: 50% 40%; }
+    .echo-w { position: absolute; font-family: var(--kr-serif); font-weight: 200; font-size: clamp(10rem, 25vw, 23rem); line-height: 1; }
+    .echo-w.w1 { left: 20%; top: 2%; color: var(--night); }
+    .echo-w.w2 { left: 55%; top: 34%; color: var(--night); }
+    .echo-and { position: absolute; left: 28%; top: 56%; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(1.6rem, 2.6vw, 2.4rem); color: var(--steel); }
+    .echo-fig {
+      position: absolute; left: 50%; top: 9%; width: clamp(230px, 25vw, 360px); aspect-ratio: 2 / 3; transform: translateX(-50%);
+      background: transparent;
+      -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%); mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+    }
+    .echo-fig img { object-position: 50% 62%; filter: grayscale(.55) contrast(.94) brightness(1.06); }
+    .echo-fig::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #9eafd2 0%, #687ca2 100%); mix-blend-mode: color; opacity: .62; }
     .echo-copy { position: absolute; left: var(--pad); bottom: 9%; max-width: 21em; }
     .echo-copy p { margin-top: 14px; font-size: .9rem; color: var(--ink-2); }
     .echo-copy .more { margin-top: 26px; }
 
     /* ===== ARCHIVE — the title slides under two staggered photos ===== */
-    .archive { padding: clamp(120px, 13vw, 200px) 0 clamp(100px, 11vw, 170px); }
+    .archive { padding: clamp(120px, 13vw, 200px) 0 clamp(120px, 13vw, 190px); }
     .arch-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); align-items: start; }
     .arch-title {
       grid-column: 1 / span 9; grid-row: 1; position: relative; z-index: 1;
       font-family: var(--display); font-weight: 400; font-size: clamp(3.6rem, 8.6vw, 9.2rem); line-height: .9; letter-spacing: .02em; text-transform: uppercase;
     }
     .arch-title span { display: block; }
-    .arch-title span + span { padding-left: .5em; }
-    .arch-ph { position: relative; }
+    .arch-title span + span { padding-left: .5em; color: var(--slate); }
     .arch-ph.p1 { grid-column: 1 / span 4; grid-row: 2; z-index: 2; margin-top: calc(-1 * clamp(1.6rem, 4vw, 4.2rem)); aspect-ratio: 1 / 1.08; }
-    .arch-ph.p1 img { object-position: 60% 50%; }
-    .arch-ph.p2 { grid-column: 4 / span 3; grid-row: 2; z-index: 3; margin-top: clamp(80px, 11vw, 170px); aspect-ratio: 3 / 4.2; box-shadow: -20px 30px 60px -36px rgba(40, 30, 20, .4); }
-    .arch-ph.p2 img { object-position: 50% 55%; }
+    .arch-ph.p1 img { object-position: 50% 50%; }
+    .arch-ph.p2 { grid-column: 4 / span 3; grid-row: 2; z-index: 3; margin-top: clamp(80px, 11vw, 170px); aspect-ratio: 3 / 4.2; box-shadow: -20px 30px 60px -36px rgba(10, 25, 49, .45); }
+    .arch-ph.p2 img { object-position: 50% 60%; }
     .arch-copy { grid-column: 8 / span 4; grid-row: 2; margin-top: clamp(30px, 4vw, 60px); }
     .arch-copy p { font-size: .94rem; color: var(--ink-2); }
     .arch-copy p:first-child { font-size: clamp(1rem, 1.25vw, 1.15rem); line-height: 1.85; color: var(--ink); font-weight: 400; }
     .arch-copy p + p { margin-top: 18px; }
     .arch-copy .more { margin-top: 30px; }
 
-    /* ===== HELLO — rounded sand card ===== */
-    .hello { padding: 0 0 clamp(60px, 7vw, 100px); }
-    .card {
-      display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); align-items: end; gap: clamp(20px, 3vw, 48px);
-      padding: clamp(18px, 2.2vw, 30px);
-      border-radius: 26px;
-      background: linear-gradient(100deg, #f3eee7 0%, #e9dfd3 55%, #d9c8b4 100%);
+    /* ===== HELLO — the navy letter from the current site ===== */
+    .hello {
+      position: relative; overflow: hidden;
+      background: var(--night); color: var(--paper);
+      padding: clamp(110px, 11vw, 170px) 0 clamp(110px, 11vw, 170px);
     }
-    .card-copy { padding: clamp(16px, 3vw, 44px); }
-    .card-title { font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem, 4.4vw, 3.8rem); line-height: 1; letter-spacing: .03em; text-transform: uppercase; }
-    .card-copy p { margin-top: 20px; max-width: 32em; font-size: .92rem; color: var(--ink-2); }
-    .field { display: flex; align-items: stretch; gap: 10px; margin-top: 30px; max-width: 30em; }
-    .field span { flex: 1; min-width: 0; padding: 11px 16px; border: 1px solid var(--ink); border-radius: 8px; font-family: var(--label); font-size: .8rem; letter-spacing: .04em; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .field b { display: grid; place-items: center; padding: 0 20px; border-radius: 8px; background: var(--ink); color: #fff; font-family: var(--label); font-weight: 500; font-size: .6rem; letter-spacing: .26em; text-transform: uppercase; transition: background .4s; }
-    .field:hover b, .field:focus-visible b { background: #3b352f; }
-    .card .more { margin-top: 26px; }
-    .card-photo { border-radius: 18px; aspect-ratio: 4 / 5; }
-    .card-photo img { object-position: 50% 22%; }
+    .gridlines {
+      position: absolute; inset: 0; pointer-events: none;
+      background: repeating-linear-gradient(90deg, rgba(202, 212, 239, .07) 0 1px, transparent 1px 25%);
+      -webkit-mask-image: linear-gradient(180deg, #000, transparent 55%); mask-image: linear-gradient(180deg, #000, transparent 55%);
+    }
+    .hello-grid { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); align-items: center; }
+    .g-media { grid-column: 2 / span 3; position: relative; isolation: isolate; }
+    .g-media::before { content: ""; position: absolute; top: -22px; left: -22px; right: 22px; bottom: 22px; z-index: -1; border: 1px solid rgba(202, 212, 239, .28); }
+    .g-frame { aspect-ratio: 3 / 5; background: var(--navy); }
+    .g-frame img { object-position: 50% 25%; filter: saturate(.92); }
+    .ring {
+      --c: clamp(120px, 11vw, 168px);
+      position: absolute; left: calc(100% - var(--c) * .22); bottom: 12%;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px;
+      width: var(--c); height: var(--c); padding-left: calc(var(--c) * .26);
+      border: 1px solid rgba(246, 250, 253, .75); border-radius: 50%;
+      background: rgba(10, 25, 49, .45); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+      color: var(--paper); isolation: isolate;
+      transition: border-color .6s var(--ease);
+    }
+    .ring::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 50%; background: rgba(247, 229, 235, .16); transform: scale(.001); transition: transform .9s var(--ease); }
+    .ring:hover, .ring:focus-visible { border-color: var(--blush); }
+    .ring:hover::before, .ring:focus-visible::before { transform: scale(1); }
+    .ring .label { letter-spacing: .4em; }
+    .ring-kr { max-width: 6.4em; font-family: var(--kr-serif); font-size: .84rem; line-height: 1.6; letter-spacing: .08em; }
+    .ring-kr .arr { display: inline-block; transition: transform .6s var(--ease); }
+    .ring:hover .arr { transform: translateX(6px); }
+    .g-text { grid-column: 7 / span 5; }
+    .g-eyebrow { display: flex; align-items: center; gap: 16px; color: var(--mist); }
+    .g-eyebrow i { display: block; width: 44px; height: 1px; background: currentColor; opacity: .5; }
+    .g-title { margin: .35em 0 .45em; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(3.2rem, 6.2vw, 6.4rem); line-height: 1; color: var(--paper); }
+    .g-p { max-width: 30em; font-family: var(--kr-serif); font-size: clamp(.96rem, 1.04vw, 1.05rem); line-height: 1.95; color: rgba(246, 250, 253, .86); }
+    .g-sign { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 22px; margin-top: clamp(40px, 4.5vw, 64px); }
+    .g-sign .sc { font-family: var(--serif); font-weight: 300; font-size: 1.75rem; line-height: 1; color: var(--blush); }
+    .g-sign .sc em { font-style: italic; }
+    .g-sign .nm { font-family: var(--kr-serif); font-size: .86rem; letter-spacing: .4em; color: var(--mist); }
 
-    /* ===== FOOTER ===== */
-    .foot { border-top: 1px solid var(--line); padding: 36px 0 44px; }
-    .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 14px 40px; }
-    .foot-brand { font-family: var(--display); font-size: 1.6rem; line-height: 1; letter-spacing: .04em; }
-    .foot nav { display: flex; gap: 28px; }
-    .foot nav a { font-family: var(--label); font-size: .6rem; letter-spacing: .34em; text-transform: uppercase; color: var(--ink-2); }
-    .foot nav a:hover { color: var(--ink); }
-    .foot .label { width: 100%; color: var(--muted); letter-spacing: .3em; }
-    .foot .label a { text-transform: none; letter-spacing: .06em; font-family: var(--italic); font-style: italic; font-size: 1rem; }
+    /* ===== FOOTER — name, mark and contact only; the header already carries the menu ===== */
+    .foot { background: var(--night); color: var(--mist); padding: 0 0 clamp(32px, 4vw, 48px); }
+    .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 14px 32px; padding-top: 28px; border-top: 1px solid rgba(202, 212, 239, .16); }
+    .foot-brand { font-family: var(--display); font-size: clamp(1.6rem, 2.4vw, 2.1rem); line-height: 1; letter-spacing: .04em; color: var(--paper); }
+    .foot-meta { width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+    .foot-meta .label { letter-spacing: .3em; }
+    .foot-meta a { font-family: var(--serif); font-style: italic; font-size: 1rem; letter-spacing: .04em; text-transform: none; border-bottom: 1px solid rgba(202, 212, 239, .3); transition: border-color .4s, color .4s; }
+    .foot-meta a:hover { color: var(--paper); border-color: var(--blush); }
 
     /* ===== back to top ===== */
     .to-top {
@@ -214,8 +264,6 @@
     /* opacity only, for elements that already carry their own transform */
     .js .rv-fade { opacity: 0; transition: opacity 1.6s var(--ease) var(--d, 0s); }
     .js .rv-fade.is-in { opacity: 1; }
-    .hero-title span { animation: rise 1.6s var(--ease) both; }
-    .hero-title span + span { animation-delay: .15s; }
     @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
 
     /* ===== RESPONSIVE ===== */
@@ -223,15 +271,16 @@
       .about-text { grid-column: 1 / span 7; }
       .about-side { grid-column: 8 / span 5; }
       .arch-copy { grid-column: 8 / span 5; }
+      .g-text { grid-column: 7 / span 6; }
     }
     @media (max-width: 820px) {
       .nav { padding: 20px var(--pad); }
+      .nav:not(.is-scrolled) { color: #fff; text-shadow: 0 1px 10px rgba(10, 25, 49, .35); }
       .hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
       .hero-photo { height: auto; aspect-ratio: 4 / 5; }
-      .hero-copy { grid-column: 1; grid-row: 2; margin: calc(-1 * clamp(60px, 17vw, 120px)) 0 0; padding: 0 var(--pad) 40px; }
-      .hero-title { font-size: clamp(3.4rem, 18vw, 6.4rem); }
-      .hero-tag, .hero-sub { padding-left: 0; }
-      .hero .more { margin-left: 0; }
+      .hero-photo::after { content: ""; position: absolute; inset: 0 0 auto; height: 28%; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(10, 25, 49, .4), rgba(10, 25, 49, 0)); }
+      .hero-copy { grid-column: 1; grid-row: 2; padding: 44px var(--pad) 48px; }
+      .hero-title { font-size: clamp(3.2rem, 16vw, 5.8rem); }
 
       .about-text { grid-column: 1 / -1; padding-top: 0; }
       .about-photo { width: 100%; }
@@ -255,14 +304,16 @@
       .arch-ph.p2 { grid-column: 6 / span 7; margin-top: clamp(120px, 34vw, 220px); }
       .arch-copy { grid-column: 1 / -1; grid-row: 3; margin-top: 56px; }
 
-      .card { grid-template-columns: minmax(0, 1fr); }
-      .card-copy { padding: 18px 8px 4px; }
-      .card-photo { grid-row: 1; aspect-ratio: 5 / 4; }
+      .g-media { grid-column: 1 / span 8; }
+      .g-media::before { top: -12px; left: -12px; right: 12px; bottom: 12px; }
+      .ring { --c: 116px; }
+      .ring-kr { font-size: .78rem; }
+      .g-text { grid-column: 1 / -1; margin-top: 72px; }
     }
     @media (max-width: 520px) {
       .nav-links { gap: 16px; }
       .nav-links a { letter-spacing: .26em; }
-      .field b { padding: 0 14px; }
+      .brand { font-size: 1.1rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -270,11 +321,12 @@
       *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
       .js .rv { opacity: 1; transform: none; }
       .js .rv-fade { opacity: 1; }
+      .slide { transform: none !important; }
     }
   </style>
 </head>
 <body>
-  <nav class="nav" aria-label="주 메뉴">
+  <nav class="nav" id="nav" aria-label="주 메뉴">
     <a class="brand" href="#top">SincereLee</a>
     <div class="nav-links">
       <a href="#about">About</a>
@@ -285,7 +337,12 @@
   </nav>
 
   <header class="hero" id="top">
-    <figure class="hero-photo ph"><img src="https://isabel.co.kr/images/hero1.jpg" alt="한옥 툇마루에 선 분홍 치마와 아이보리 저고리 차림의 여성 옆모습" width="1080" height="1616"></figure>
+    <div class="hero-photo ph" id="slides" role="img" aria-label="하늘색 두루마기와 분홍·연보라 치마 차림의 한복 사진들">
+      <div class="slide is-active" style="--pos:62% 50%;background-image:url('https://isabel.co.kr/images/hero5.jpg')"></div>
+      <div class="slide" style="--pos:50% 58%" data-bg="https://isabel.co.kr/images/hero2.jpg"></div>
+      <div class="slide" style="--pos:40% 50%" data-bg="https://isabel.co.kr/images/hero10.jpg"></div>
+      <div class="slide" style="--pos:58% 50%" data-bg="https://isabel.co.kr/images/hero6.jpg"></div>
+    </div>
     <div class="hero-copy">
       <p class="label hero-kicker">韓服 · Digital Archive</p>
       <h1 class="hero-title" id="heroName"><span>Sincere</span><span>Lee</span></h1>
@@ -302,10 +359,10 @@
           <h2 class="h-small" id="aboutTitle">About</h2>
           <p class="lead">SincereLee는 편지의 맺음말 <em>‘Sincerely(진심을 담아)’</em>를 떠올리는 이름입니다.</p>
           <p class="body">sincerely는 ‘순수하고 거짓 없음’을 뜻하는 라틴어 <i>sincerus</i>에서 나와, 1700년대 초부터 편지 끝에서 “이건 진심입니다”라고 서명해온 말이죠.</p>
-          <figure class="about-photo ph"><img src="https://isabel.co.kr/images/hero7.jpg" alt="현판이 걸린 전각 마루에 앉은 옥색·분홍·아이보리 한복 차림의 사람들" width="1600" height="1200" loading="lazy" decoding="async"></figure>
+          <figure class="about-photo ph"><img src="https://isabel.co.kr/images/hero4.jpg" alt="단청 기둥 사이 대청마루에 앉아 바깥 전각을 바라보는 한복 차림의 사람들" width="1600" height="1067" loading="lazy" decoding="async"></figure>
         </div>
         <div class="about-side">
-          <figure class="side-photo ph rv" style="--d:.15s"><img src="https://isabel.co.kr/images/hero11.jpg" alt="꽃다발과 갓 모양 모자를 든 한복 차림의 여성" width="1200" height="1200" loading="lazy" decoding="async"></figure>
+          <figure class="side-photo ph rv" style="--d:.15s"><img src="https://isabel.co.kr/images/hero1.jpg" alt="한옥 툇마루에 선 분홍 치마와 아이보리 저고리 차림의 여성 옆모습" width="1080" height="1616" loading="lazy" decoding="async"></figure>
           <p class="vword rv-fade" style="--d:.3s" aria-hidden="true"><span>Sincere</span><span>Lee</span></p>
         </div>
       </div>
@@ -340,8 +397,8 @@
     <section class="archive" id="archive" aria-labelledby="archTitle">
       <div class="wrap arch-grid">
         <h2 class="arch-title rv" id="archTitle"><span>Hanbok</span><span>Archive</span></h2>
-        <figure class="arch-ph p1 ph rv" style="--d:.1s"><img src="https://isabel.co.kr/images/hero4.jpg" alt="단청 기둥 사이 대청마루에 앉아 바깥 전각을 바라보는 한복 차림의 사람들" width="1600" height="1067" loading="lazy" decoding="async"></figure>
-        <figure class="arch-ph p2 ph rv" style="--d:.2s"><img src="https://isabel.co.kr/images/hero2.jpg" alt="하늘색 두루마기와 검은 갓, 남색 저고리와 연보라 치마 차림의 두 사람이 한옥 지붕과 초록 언덕을 바라보는 뒷모습" width="1200" height="1800" loading="lazy" decoding="async"></figure>
+        <figure class="arch-ph p1 ph rv" style="--d:.1s"><img src="https://isabel.co.kr/images/hero7.jpg" alt="현판이 걸린 전각 마루에 앉은 옥색·분홍·아이보리 한복 차림의 사람들" width="1600" height="1200" loading="lazy" decoding="async"></figure>
+        <figure class="arch-ph p2 ph rv" style="--d:.2s"><img src="https://isabel.co.kr/images/hero3.jpg" alt="붉은 기둥과 단청 처마 아래 정자에서 초록 풍경을 바라보는 코발트·남색 한복 차림의 두 사람 뒷모습" width="1200" height="1800" loading="lazy" decoding="async"></figure>
         <div class="arch-copy rv" style="--d:.15s">
           <p>흩어진 것들을 모아 다음 사람에게 잘 건네는 일이야말로, 좋은 것을 오래 잇는 상서로운 일이라 믿으니까요.</p>
           <p>갤러리는 지금 한 땀 한 땀 짓는 중이에요.</p>
@@ -351,15 +408,20 @@
     </section>
 
     <section class="hello" id="hello" aria-labelledby="helloTitle">
-      <div class="wrap">
-        <div class="card rv">
-          <div class="card-copy">
-            <h2 class="card-title" id="helloTitle">Hello,</h2>
-            <p>안녕하세요, 이윤서입니다. 이렇게 찾아와 주셔서 반갑습니다. 흩어진 한복 자료를 모아 아카이브로 엮는 연구를 하다 보니, 제 이야기도 한곳에 모아두고 싶었습니다. 인생 첫 사이트라 곳곳이 아직 공사중이지만, 기록이란 원래 계속 더해지는 법이니까요. 하나씩 채워갈테니 가끔 들러 달라지는 모습을 지켜봐 주세요.</p>
-            <a class="field" href="mailto:lisabelys@gmail.com"><span>lisabelys@gmail.com</span><b>Mail</b></a>
-            <a class="more" href="/cv">CV · 전체 이력 보기<svg viewBox="0 0 34 8" fill="none" stroke="currentColor" aria-hidden="true"><path d="M0 4h33M29.5 1 33 4l-3.5 3"/></svg></a>
-          </div>
-          <figure class="card-photo ph"><img src="https://isabel.co.kr/profile.jpg" alt="이윤서 프로필 사진" width="1200" height="1500" loading="lazy" decoding="async"></figure>
+      <div class="gridlines" aria-hidden="true"></div>
+      <div class="wrap hello-grid">
+        <div class="g-media">
+          <figure class="g-frame ph rv"><img src="https://isabel.co.kr/profile.jpg" alt="이윤서 프로필 사진" width="1200" height="1500" loading="lazy" decoding="async"></figure>
+          <a class="ring rv-fade" href="/cv" style="--d:.5s">
+            <span class="label" aria-hidden="true">CV</span>
+            <span class="ring-kr">전체 이력 보기 <span class="arr">→</span></span>
+          </a>
+        </div>
+        <div class="g-text">
+          <p class="label g-eyebrow rv"><i></i> Yunseo Isabel Lee</p>
+          <h2 class="g-title rv" id="helloTitle" style="--d:.08s">Hello,</h2>
+          <p class="g-p rv" style="--d:.16s">안녕하세요, 이윤서입니다. 이렇게 찾아와 주셔서 반갑습니다. 흩어진 한복 자료를 모아 아카이브로 엮는 연구를 하다 보니, 제 이야기도 한곳에 모아두고 싶었습니다. 인생 첫 사이트라 곳곳이 아직 공사중이지만, 기록이란 원래 계속 더해지는 법이니까요. 하나씩 채워갈테니 가끔 들러 달라지는 모습을 지켜봐 주세요.</p>
+          <p class="g-sign rv" style="--d:.24s"><span class="sc">Sincere<em>Lee</em>,</span><span class="nm">이윤서</span></p>
         </div>
       </div>
     </section>
@@ -368,8 +430,10 @@
   <footer class="foot">
     <div class="wrap foot-in">
       <p class="foot-brand">SincereLee</p>
-      <nav aria-label="바닥 메뉴"><a href="#about">About</a><a href="#archive">Gallery</a><a href="/cv">CV</a><a href="/en" lang="en">English</a></nav>
-      <p class="label">© 2026 Yunseo Isabel Lee · <a href="mailto:lisabelys@gmail.com">lisabelys@gmail.com</a></p>
+      <div class="foot-meta">
+        <p class="label">© 2026 Yunseo Isabel Lee · <a href="mailto:lisabelys@gmail.com">lisabelys@gmail.com</a></p>
+        <p class="label" aria-hidden="true">允 · 瑞</p>
+      </div>
     </div>
   </footer>
 
@@ -380,6 +444,7 @@
       'use strict';
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+      /* reveal on scroll */
       var items = [].slice.call(document.querySelectorAll('.rv, .rv-fade'));
       if (reduce || !('IntersectionObserver' in window)) {
         items.forEach(function (el) { el.classList.add('is-in'); });
@@ -394,14 +459,46 @@
         alert('여기 누르면 뭐 나오나 궁금하셨죠? Ctrl+D(⌘+D) 💜');
       });
 
-      var toTop = document.getElementById('toTop'), foot = document.querySelector('.foot'), ticking = false;
+      /* header frosts as soon as the page moves; back-to-top after a short scroll, out of the way at the footer */
+      var nav = document.getElementById('nav'), toTop = document.getElementById('toTop'), foot = document.querySelector('.foot'), ticking = false;
       function onScroll() {
         ticking = false;
         var y = window.scrollY || window.pageYOffset;
+        nav.classList.toggle('is-scrolled', y > 24);
         toTop.classList.toggle('is-shown', y > window.innerHeight * .3 && foot.getBoundingClientRect().top > window.innerHeight);
       }
       window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
       onScroll();
+
+      /* hero slideshow: crossfade, load the next photo ahead of time, pause while the tab is hidden */
+      var slides = [].slice.call(document.querySelectorAll('#slides .slide'));
+      var n = slides.length, cur = 0, timer = null, DUR = reduce ? 8000 : 5600;
+      var ready = slides.map(function (s) { return !s.getAttribute('data-bg'); });
+      function preload(k) {
+        var s = slides[k];
+        if (ready[k] || s.getAttribute('data-loading')) return;
+        s.setAttribute('data-loading', '1');
+        var src = s.getAttribute('data-bg'), img = new Image();
+        img.onload = img.onerror = function () { s.style.backgroundImage = 'url("' + src + '")'; ready[k] = true; };
+        img.src = src;
+      }
+      function tick() {
+        var k = (cur + 1) % n;
+        if (!ready[k]) { preload(k); timer = setTimeout(tick, 600); return; }
+        slides[cur].classList.remove('is-active');
+        cur = k;
+        slides[cur].classList.add('is-active');
+        preload((cur + 1) % n);
+        timer = setTimeout(tick, DUR);
+      }
+      if (n > 1) {
+        preload(1);
+        timer = setTimeout(tick, DUR);
+        document.addEventListener('visibilitychange', function () {
+          clearTimeout(timer);
+          if (!document.hidden) timer = setTimeout(tick, DUR);
+        });
+      }
     })();
   </script>
 </body>

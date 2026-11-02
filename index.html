@@ -175,6 +175,25 @@
     }
     .side-lang::before { content: ""; width: 1px; height: 44px; background: currentColor; opacity: .7; transition: height .6s var(--ease); }
     .side-lang:hover::before, .side-lang:focus-visible::before { height: 72px; }
+    /* back to top: the same hairline tab, at the foot of the right edge; out once the page has moved */
+    .side-top {
+      position: fixed; z-index: 70; right: calc(clamp(14px, 1.8vw, 28px) - 14px); bottom: clamp(18px, 3vw, 40px);
+      display: flex; align-items: center; gap: 14px; writing-mode: vertical-rl;
+      padding: 10px 14px;
+      font-family: var(--sans); font-size: .6rem; line-height: 1; letter-spacing: .42em; text-transform: uppercase; text-decoration: none;
+      color: #fff; mix-blend-mode: difference;
+      opacity: 0; visibility: hidden; transform: translateY(14px);
+      transition: opacity .6s var(--ease), transform .6s var(--ease), visibility 0s linear .6s;
+    }
+    .side-top.is-shown { opacity: 1; visibility: visible; transform: none; transition: opacity .6s var(--ease), transform .6s var(--ease), visibility 0s; }
+    .side-top::before { content: ""; width: 1px; height: 44px; background: currentColor; opacity: .7; transition: height .6s var(--ease); }
+    .side-top::after { /* arrowhead on the tip of the line */
+      content: ""; position: absolute; top: 10px; left: 50%;
+      width: 7px; height: 7px; margin-left: -3.5px;
+      border-top: 1px solid currentColor; border-left: 1px solid currentColor;
+      transform: rotate(45deg);
+    }
+    .side-top:hover::before, .side-top:focus-visible::before { height: 72px; }
 
     /* ===== HERO ===== */
     .hero {
@@ -758,6 +777,7 @@
   </nav>
 
   <a class="side-lang" href="/en" lang="en" hreflang="en">English</a>
+  <a class="side-top" id="toTop" href="#top" title="맨 위로">Top</a>
 
   <header class="hero" id="top">
     <div class="hero-slides" id="slides" aria-hidden="true">
@@ -947,6 +967,8 @@
 
       /* nav: glass backdrop once scrolled */
       var nav = document.getElementById('nav');
+      var toTop = document.getElementById('toTop');
+      var foot = document.querySelector('.footer');
       var ticking = false;
       function onScroll() {
         ticking = false;
@@ -957,6 +979,8 @@
         nav.classList.toggle('show-brand', y > heroH * .45);
         var under = document.elementFromPoint(4, nav.offsetHeight + 2);
         nav.classList.toggle('is-light', !!(under && under.closest && under.closest('.about') && !under.closest('.bojagi')));
+        /* back-to-top tab: out after a short scroll, steps aside once the footer's own Top link is on screen */
+        toTop.classList.toggle('is-shown', y > window.innerHeight * .3 && foot.getBoundingClientRect().top > window.innerHeight);
       }
       window.addEventListener('scroll', function () {
         if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }

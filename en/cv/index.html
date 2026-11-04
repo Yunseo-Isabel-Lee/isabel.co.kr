@@ -165,10 +165,10 @@
     .edu-item:not(:last-child)::after { /* rail to the next dot */
       content: ""; position: absolute; left: 4px; top: 22px; bottom: -4px; width: 1px; background: var(--mist);
     }
-    .edu-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 20px; }
-    .edu-yr { flex: none; margin: 0; font-family: var(--label); font-weight: 500; font-size: 0.74rem; letter-spacing: 0.12em; line-height: 1.6; color: var(--slate); }
     .edu-item h3 { margin: 0; font-size: 1.04rem; font-weight: 600; line-height: 1.55; color: var(--ink); word-break: keep-all; }
-    .edu-item .school { margin: 2px 0 0; font-size: 0.9rem; color: var(--text); }
+    .edu-item .meta { margin: 3px 0 0; font-size: 0.88rem; color: var(--muted); }
+    .edu-item .meta b { font-weight: 400; color: var(--text); }
+    .edu-item .meta i { font-style: normal; margin: 0 9px; color: var(--mist); }
     .edu-item .thesis {
       display: flex; align-items: baseline; gap: 10px;
       margin: 12px 0 0; padding: 10px 14px; border-radius: 6px;
@@ -239,7 +239,7 @@
     @media (max-width: 560px) {
       .en { letter-spacing: 0.26em; }
       .band { font-size: 0.9rem; letter-spacing: 0.02em; }
-      .entry .meta i { margin: 0 6px; }
+      .entry .meta i, .edu-item .meta i { margin: 0 6px; }
       .edu-item .thesis { flex-direction: column; gap: 2px; }
       .script { font-size: 2.3rem; }
     }
@@ -310,18 +310,12 @@
           <h2 class="m-h"><span>Education</span></h2>
           <ol class="edu">
             <li class="edu-item" data-period="2026-01/">
-              <div class="edu-row">
-                <h3>Ph.D. Student, Cultural Informatics</h3>
-                <p class="edu-yr">2026 – Present</p>
-              </div>
-              <p class="school">The Academy of Korean Studies, Korea</p>
+              <h3>Ph.D. Student, Cultural Informatics</h3>
+              <p class="meta"><b>The Academy of Korean Studies, Korea</b><i>|</i>2026 – Present</p>
             </li>
             <li class="edu-item">
-              <div class="edu-row">
-                <h3>M.S. in Korean &amp; Asian Traditional Dress</h3>
-                <p class="edu-yr">2022 – 2025</p>
-              </div>
-              <p class="school">Dankook University, Korea</p>
+              <h3>M.S. in Korean &amp; Asian Traditional Dress</h3>
+              <p class="meta"><b>Dankook University, Korea</b><i>|</i>2022 – 2025</p>
               <p class="thesis"><small>Master’s Thesis</small><a href="https://www.riss.kr/link?id=T17183184">Database Design for a Hanbok Data Archive: Focused on the Seok Juseon Memorial Museum Collection of Dankook <span style="white-space:nowrap">University<i>↗</i></span></a></p>
             </li>
           </ol>

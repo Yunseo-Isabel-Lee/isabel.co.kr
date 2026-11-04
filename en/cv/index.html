@@ -157,16 +157,17 @@
     .edu-item { position: relative; padding: 0 0 30px 30px; }
     .edu-item:last-child { padding-bottom: 0; }
     .edu-item::before { /* dot */
-      content: ""; position: absolute; left: 0; top: 5px;
+      content: ""; position: absolute; left: 0; top: 8px;
       width: 9px; height: 9px; border-radius: 50%;
       background: var(--sheet); border: 1.5px solid var(--haze);
     }
     .edu-item.now::before { background: var(--slate); border-color: var(--slate); box-shadow: 0 0 0 4px var(--band); }
     .edu-item:not(:last-child)::after { /* rail to the next dot */
-      content: ""; position: absolute; left: 4px; top: 19px; bottom: 4px; width: 1px; background: var(--mist);
+      content: ""; position: absolute; left: 4px; top: 22px; bottom: -4px; width: 1px; background: var(--mist);
     }
-    .edu-yr { margin: 0; font-family: var(--label); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.14em; line-height: 1.6; color: var(--slate); }
-    .edu-item h3 { margin: 4px 0 0; font-size: 1.04rem; font-weight: 600; line-height: 1.55; color: var(--ink); word-break: keep-all; }
+    .edu-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 20px; }
+    .edu-yr { flex: none; margin: 0; font-family: var(--label); font-weight: 500; font-size: 0.74rem; letter-spacing: 0.12em; line-height: 1.6; color: var(--slate); }
+    .edu-item h3 { margin: 0; font-size: 1.04rem; font-weight: 600; line-height: 1.55; color: var(--ink); word-break: keep-all; }
     .edu-item .school { margin: 2px 0 0; font-size: 0.9rem; color: var(--text); }
     .edu-item .thesis {
       display: flex; align-items: baseline; gap: 10px;
@@ -309,13 +310,17 @@
           <h2 class="m-h"><span>Education</span></h2>
           <ol class="edu">
             <li class="edu-item" data-period="2026-01/">
-              <p class="edu-yr">2026 – Present</p>
-              <h3>Ph.D. Student, Cultural Informatics</h3>
+              <div class="edu-row">
+                <h3>Ph.D. Student, Cultural Informatics</h3>
+                <p class="edu-yr">2026 – Present</p>
+              </div>
               <p class="school">The Academy of Korean Studies, Korea</p>
             </li>
             <li class="edu-item">
-              <p class="edu-yr">2022 – 2025</p>
-              <h3>M.S. in Korean &amp; Asian Traditional Dress</h3>
+              <div class="edu-row">
+                <h3>M.S. in Korean &amp; Asian Traditional Dress</h3>
+                <p class="edu-yr">2022 – 2025</p>
+              </div>
               <p class="school">Dankook University, Korea</p>
               <p class="thesis"><small>Master’s Thesis</small><a href="https://www.riss.kr/link?id=T17183184">Database Design for a Hanbok Data Archive: Focused on the Seok Juseon Memorial Museum Collection of Dankook <span style="white-space:nowrap">University<i>↗</i></span></a></p>
             </li>

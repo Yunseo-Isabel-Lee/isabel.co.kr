@@ -150,6 +150,38 @@
     }
     .entry .link:hover { color: var(--deep); border-bottom-color: var(--deep); }
 
+    /* education: a quiet timeline — year label, degree, school, thesis */
+    .edu { margin: 0; padding: 0; list-style: none; }
+    .edu-item { position: relative; padding: 0 0 30px 30px; }
+    .edu-item:last-child { padding-bottom: 0; }
+    .edu-item::before { /* dot */
+      content: ""; position: absolute; left: 0; top: 5px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--sheet); border: 1.5px solid var(--haze);
+    }
+    .edu-item.now::before { background: var(--slate); border-color: var(--slate); box-shadow: 0 0 0 4px var(--band); }
+    .edu-item:not(:last-child)::after { /* rail to the next dot */
+      content: ""; position: absolute; left: 4px; top: 19px; bottom: 4px; width: 1px; background: var(--mist);
+    }
+    .edu-yr { margin: 0; font-family: var(--label); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.14em; line-height: 1.6; color: var(--slate); }
+    .edu-item h3 { margin: 4px 0 0; font-size: 1.04rem; font-weight: 600; line-height: 1.55; color: var(--ink); word-break: keep-all; }
+    .edu-item .school { margin: 2px 0 0; font-size: 0.9rem; color: var(--text); }
+    .edu-item .thesis {
+      display: flex; align-items: baseline; gap: 10px;
+      margin: 12px 0 0; padding: 10px 14px; border-radius: 6px;
+      background: var(--frost); font-size: 0.86rem; line-height: 1.6;
+    }
+    .edu-item .thesis small {
+      flex: none; font-family: var(--label); font-weight: 600; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--haze);
+    }
+    .edu-item .thesis a {
+      color: var(--deep); word-break: keep-all; overflow-wrap: anywhere;
+      text-decoration: underline; text-decoration-color: var(--mist); text-decoration-thickness: 1px; text-underline-offset: 4px;
+      transition: color .2s ease, text-decoration-color .2s ease;
+    }
+    .edu-item .thesis a:hover { color: var(--ink); text-decoration-color: var(--deep); }
+    .edu-item .thesis a i { display: inline-block; font-style: normal; margin-left: 4px; color: var(--haze); }
+
     .sign {
       display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap;
       margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line);
@@ -205,6 +237,7 @@
       .en { letter-spacing: 0.26em; }
       .band { font-size: 0.9rem; letter-spacing: 0.02em; }
       .entry .meta i { margin: 0 6px; }
+      .edu-item .thesis { flex-direction: column; gap: 2px; }
       .script { font-size: 2.3rem; }
     }
     @media print {
@@ -269,6 +302,23 @@
           <p class="en">Yunseo Isabel Lee</p>
           <p class="band">한국학중앙연구원 인문정보학과 박사과정</p>
         </header>
+
+        <section class="m-sec">
+          <h2 class="m-h"><span>Education</span></h2>
+          <ol class="edu">
+            <li class="edu-item" data-period="2026-01/">
+              <p class="edu-yr">2026 – 현재</p>
+              <h3>인문정보학과 박사과정</h3>
+              <p class="school">한국학중앙연구원 한국학대학원</p>
+            </li>
+            <li class="edu-item">
+              <p class="edu-yr">2022 – 2025</p>
+              <h3>전통의상학과 이학석사</h3>
+              <p class="school">단국대학교 대학원</p>
+              <p class="thesis"><small>석사학위논문</small><a href="https://www.riss.kr/link?id=T17183184">한복 유물 데이터 아카이브를 위한 DB 설계: 단국대학교 석주선기념박물관 소장품을 <span style="white-space:nowrap">중심으로<i>↗</i></span></a></p>
+            </li>
+          </ol>
+        </section>
 
         <section class="m-sec">
           <h2 class="m-h"><span>Projects</span></h2>
